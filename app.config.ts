@@ -2,12 +2,11 @@ export default defineAppConfig({
   // Configure Content Wind here
   cover: '/cover.jpg',
   socials: {
-    twitter: 'Atinux',
-    github: 'Atinux/content-wind'
+    github: 'woodmont-civic/woodmont-civic.github.io',
   },
   prose: {
     h1: {
-      icon: 'carbon:sailboat-coastal'
+      icon: 'akar-icons:air'
     }
   }
 })
