@@ -1,6 +1,7 @@
 ---
 navigation.title: 'June Board Meeting'
-layout: 'full-width'
+layout: 'default'
+title: June Board Meeting
 ---
 
 # June Board Meeting
