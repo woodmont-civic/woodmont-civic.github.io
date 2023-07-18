@@ -1,12 +1,7 @@
 ---
 navigation.title: 'June Board Meeting'
-layout: 'full-width'
-title: My first blog post
-image: first-post.jpg
-tags:
-  - Front-end
-  - Programming
-  - Career
+layout: 'default'
+title: June Board Meeting
 ---
 
 # June Board Meeting

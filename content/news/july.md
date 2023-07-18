@@ -1,0 +1,51 @@
+---
+navigation.title: 'July Board Meeting'
+layout: 'default'
+title: July Board Meeting
+---
+
+# July Board Meeting
+
+Date: 07/12
+
+- Darla (Secretary)
+- Peter (Communications)
+- Jay (Treasurer)
+- Ed (VP)
+- Gabriel (Pres)
+
+### Agenda
+
+1. Introduction of New Secretary: Darla was introduced as the new Secretary of the Woodmont Civic Association.
+2. Temporary Signs for Neighborhood Entrances:
+   - Peter volunteered to investigate the purchase of two new signs before the next meeting.
+   - Note: Permission from property owners may be required to install the signs in their yards.
+3. Neighborhood Watch:
+   - County police emails are now being sent automatically to keep residents informed.
+4. Dues:
+   - Members can drop off dues at Jay's house or mail them to the PO box.
+   - TBD: An option to drop off dues at the Woodmont Pool dropbox may be provided.
+5. Website Adjustments:
+   - The Register and Dues pages on the website will be combined.
+   - The content will be made less wordy.
+   - Membership validity will be clarified as contingent upon payment of dues.
+6. Public Meeting on Aug 9:
+   - During the announcement, it will be stated that the registration form will be introduced at the public meeting.
+   - Membership requires payment of annual dues, which will be collected in October.
+   - A QR code will be provided at the meeting.
+   - The next meeting will be scheduled for 6:30.
+   - All projects will be presented in a way that emphasizes their positive impact on home values.
+     - Project Proposals: National Night Out, Leaf Removal, Community Dumpster, Dog Park, Entrance Signage & Landscaping
+   - The new meeting date will be mentioned at the public meeting.
+   - A class will be offered to educate members on accessing materials and digital newsletters.
+   - Handouts will be distributed at public meetings
+
+
+_Question:_ We also discussed the possibility of installing a dropbox at the treasurer's house for dues collection. I would like to investigate if we can use the dropbox at the Woodmont Rec Center instead. Thoughts? 
+
+### TODO Items
+
+- Clean sign @ Woodmont Drive (delegate task to grounds committee)
+- Purchase temporary signs before the August public meeting (Peter)
+- Print handouts for the public meeting with dues information and news (Peter & Gabriel)
+- Update the website with the requested changes and distribute the details for upcoming public meeting (Gabriel) The meeting notes are [here](https://docs.google.com/document/d/1Ppq1683HvO204Sq1gv7xYQIJLadDZtboThFzCUJ1QfM/edit?usp=sharing). Feel free to comment or update the notes as needed.

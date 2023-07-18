@@ -1,6 +1,7 @@
 ---
 navigation.title: '2020-2023'
-layout: 'full-width'
+layout: 'default'
+title: Previous Term
 ---
 
 # WCA Board Actions 2020-2023
