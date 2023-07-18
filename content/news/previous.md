@@ -6,9 +6,9 @@ title: Previous Term
 
 # WCA Board Actions 2020-2023
 
-During Peter Fisher-Duke's tenure as Woodmont Civic Association (WCA) President from 2020-2023, several significant accomplishments were achieved. These include:
+Several significant accomplishments were achieved over the past few years. These include:
 
-1. Improved Financial Transparency: Peter added himself as a second authorized user on the WCA bank account, enhancing transparency within the organization.
+1. Increased Financial Transparency by adding multiple board members to the accounts & digitizing records for public access.
 
 2. Enhanced Communication Infrastructure: A new domain name, woodmontbonair.com, was purchased and configured, along with a new Gmail address, to streamline communication by routing emails to various board members. This setup facilitates smooth transitions during board member elections.
 
