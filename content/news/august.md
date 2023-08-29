@@ -1,0 +1,48 @@
+---
+navigation.title: 'August Public Meeting'
+layout: 'default'
+title: August Public Meeting
+---
+
+# August Public Meeting
+
+Date: 08/09
+
+- Darla (Secretary)
+- Peter (Communications)
+- Jay (Treasurer)
+- Ed (VP)
+- Gabriel (Pres)
+- Open to Public
+
+Thanks to everyone who showed up for the WCA Public meeting! It was great to see such interest in our community! And on that note, we filled **20 volunteer positions** for various WCA subcomittees! Our goal was to fill positions for the Grounds and Social committee, not only did we get these poisons filled, but we formed 2 new committees as well (Welcoming and Trails)!
+
+**Meeting Highlights:**
+
+* We had the pleasure of introducing our new board members.
+* The meeting took an unorthodox approach to ensure we covered all points effectively.
+* A recap was presented of our achievements from the past few years, highlighting our efforts in increasing financial transparency, enhancing communication channels, introducing streamlined maintenance procedures, and more.
+
+### Agenda
+
+* Our first public meeting of the year took place on August 9 (some groundhogs sleep later than others 😂)
+* We have scheduled our second public meeting for October 18th.
+* A membership drive will run throughout October, with dues set at $20.
+
+**Suggestions for Coming Year:** The board is looking for feedback for next year’s agenda. The question is what you all would like us to focus on? We will put the suggestions up for community vote at the October meeting (and by online form as well). Some of these suggestions include:
+
+* Gathering information about Speed bumps, Paving roads and Neighborhood Lighting.
+* Organizing community social events and participating in National Night Out.
+* Enhancing community services, such as leaf removal and trail maintenance.
+* Exploring the possibility of revitalizing the land surrounding the Woodmond Rec Center (improving Trail maintenance, adding a dog park or woodland play area).
+* Improving entrance signage and landscaping.
+* If you would like to add a suggestion just email board@woodmontbonair.com
+
+### Action Items
+
+The board is committed to taking several actions based on the feedback and discussions from the meeting:
+
+* We'll be checking if we can use the dropbox at Woodmont pool for dues collection.
+* Restrictive covenants will be posted on our community website.
+* Expanding the area to be maintained around the main entrances. 
+* Given the positive response, we're considering organizing a community cookout for the October meeting to foster greater community involvement.
