@@ -5,5 +5,10 @@ export default defineNuxtConfig({
     },
     modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
   },
+  nitro: {
+    prerender: {
+      failOnError: false,
+    }
+  },
   extends: 'content-wind',
 })
