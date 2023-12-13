@@ -13,5 +13,9 @@
     "@nuxtjs/google-analytics": "^2.4.0",
     "content-wind": "latest",
     "nuxt": "^3.8.1"
+  },
+  "dependencies": {
+    "nuxt": "3.7.3",
+    "nitro": "2.6.3"
   }
 }
