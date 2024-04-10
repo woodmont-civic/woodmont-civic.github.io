@@ -1,0 +1,37 @@
+## Dear Woodmont Residents,
+
+As we step into a season of renewal and community spirit, the Woodmont Civic Association is thrilled to share some key updates and extend an invitation for you to play an active role in our neighborhood's future. Your involvement is crucial to our collective success, and there are several ways you can contribute and stay informed.
+
+### Woodmont Yard Sale - Spring 2024!
+
+Organizing such an event requires community effort, and we're looking for volunteers to help with setting a date, coordinating household sign-ups, and placing signs around Huguenot. Even if you can only offer your ideas, it's a valuable contribution.
+
+Join the mailing list here: [Woodmont Community Ambassadors](https://groups.google.com/g/wca-community).
+
+### Join Our Mailing Lists - Stay Connected and Involved
+
+Joining our community conversations is now a breeze. We've created mailing lists for our committees, making it easy for you to stay informed about the topics you care about. Click "Join" on the page to become part of the conversation. Each newsletter includes an option to leave, so you're always in control of your preferences:
+
+* **[Woodmont Newsletter](https://groups.google.com/g/woodmont-neighborhood):** Get the latest news and events.
+
+* **[Community Ambassadors](https://groups.google.com/g/wca-community):** Welcoming newcomers, annual yard sale, community events
+
+* **[Grounds Committee](https://groups.google.com/g/wca-grounds):**  Help us beautify Woodmont. From planting flowers to organizing clean-up days, your involvement makes our neighborhood a more welcoming place.
+
+* **[Woodmont Neighborhood Watch](https://groups.google.com/g/wca-neighborhood-watch)** Chesterfield County monthly Crime Report and updates
+ > *Note:* To streamline our communications, we've created a separate group for Neighborhood Watch updates, previously shared via the main WCA list. This ensures those interested can receive focused information without other distractions.
+
+
+
+### Let's Make Woodmont Shine Together
+
+Your participation, whether through joining a committee, attending meetings, or simply sharing your ideas, is what makes Woodmont a wonderful place to live. We look forward to seeing you at our upcoming meeting and working together to enhance our community.
+
+**Visit Our Website:** https://woodmontbonair.com/
+
+Warm regards,
+
+Gabriel Duke
+President, Woodmont Civic Association
+
+*P.S. We're here to listen and act on your feedback. If you have any concerns or ideas, please don't hesitate to contact us at board@woodmontbonair.com.*
