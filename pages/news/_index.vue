@@ -1,4 +1,5 @@
 <template>
+    <pre>{{ navigation }}</pre>
     <div>
       <h1 class="text-7xl font-black text-center">New on the blog</h1>
       <div v-for="post in posts" :key="post.title">
@@ -7,19 +8,6 @@
     </div>
 </template>
 
-<script>
-export default {
-  async asyncData({ $content }) {
-    const posts = await $content('news')
-      .only(['title', 'image', 'tags', 'slug'])
-      .sortBy('createdAt', 'desc')
-      .fetch()
-      
-    console.log("posts", posts)  
-
-    return {
-      posts,
-    }
-  },
-}
+<script setup>
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
 </script>

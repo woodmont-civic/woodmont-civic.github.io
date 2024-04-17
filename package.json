@@ -14,6 +14,7 @@
     "content-wind": "latest"
   },
   "dependencies": {
-    "nuxt": "3.7.3"
+    "nuxt": "3.7.3",
+    "nuxt3": "^3.8.0-28284309.b3d3d7f4"
   }
 }
