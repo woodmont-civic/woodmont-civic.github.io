@@ -16,6 +16,6 @@ title: Posts
 * [June Board Meeting](/posts/2023_06)
 * [August Newsletter](/posts/2023_08)
 
-2020
+2022
 
 * [Previous term](/posts/2020)
