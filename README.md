@@ -11,13 +11,16 @@ yarn dev
 
 ## Pull Request Previews
 
-When you create a Pull Request, the website will automatically build and deploy to a preview URL. This allows you to review your changes before merging to the main branch.
+When you create a Pull Request, the website will automatically build and create a downloadable preview. Due to GitHub Pages limitations, live preview URLs aren't automatically generated, but you can still review your changes.
 
+**Current Setup:**
 1. Create a new branch and make your changes
 2. Push your branch and create a Pull Request
-3. The GitHub Action will automatically build and deploy a preview
-4. You'll see a preview URL in the PR comments
+3. The GitHub Action will automatically build your site
+4. Download the built site from the Actions tab to preview locally
 5. Once approved and merged, the changes will deploy to the main site
+
+**For live preview URLs:** Consider integrating with Vercel or Netlify (see `PREVIEW_SETUP.md` for details).
 
 ## Build
 
@@ -276,6 +279,26 @@ node .output/server/index.mjs
 ```
 
 Learn more on [Nuxt docs](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+---
+
+## Releases
+
+The Neighborhood Covenant PDF is automatically hosted on GitHub Releases for optimal performance and version control.
+
+**How it works:**
+- Every merge to main automatically creates a new release
+- The PDF is automatically uploaded as a release asset
+- Versions are generated automatically (e.g., `v2025.01.29-a1b2c3d`)
+- No manual steps required!
+
+**To update the PDF:**
+1. Replace the file in `public/neighborhood-covenant.pdf`
+2. Commit and push changes
+3. Merge to main
+4. GitHub automatically creates a new release with the updated PDF
+
+See `RELEASE_GUIDE.md` for detailed information.
 
 ---
 

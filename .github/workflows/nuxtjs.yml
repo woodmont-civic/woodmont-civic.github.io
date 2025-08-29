@@ -76,16 +76,28 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  deploy-preview:
-    environment:
-      name: preview
-      url: ${{ steps.deployment.outputs.page_url }}
+  # For PRs, we'll use GitHub's built-in preview functionality
+  # The built site will be available as a downloadable artifact
+  # and can be viewed locally or deployed elsewhere if needed
+  build-preview:
     runs-on: ubuntu-latest
     needs: build
     if: github.event_name == 'pull_request'
     steps:
-      - name: Deploy Preview
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Download built site
+        uses: actions/download-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          name: pages-artifact
+          path: ./dist
+
+      - name: Comment PR with Preview Info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview Build Ready!**\n\nThis PR has been built successfully.\n\n**To preview your changes:**\n1. Download the \`pages-artifact\` from the Actions tab\n2. Extract and open \`dist/index.html\` in your browser\n3. Or deploy to a preview service like Vercel/Netlify\n\n**Build Status:** ✅ Successfully built and ready for review`
+            })
+
