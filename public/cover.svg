@@ -1,0 +1,81 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tree" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#228B22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#006400;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  
+  <!-- Sun -->
+  <circle cx="1000" cy="150" r="80" fill="#FFD700" opacity="0.9"/>
+  
+  <!-- Grass base -->
+  <rect x="0" y="600" width="1200" height="200" fill="url(#grass)"/>
+  
+  <!-- Trees -->
+  <g id="tree1">
+    <ellipse cx="200" cy="500" rx="80" ry="120" fill="url(#tree)" opacity="0.8"/>
+    <rect x="190" y="500" width="20" height="100" fill="#8B4513"/>
+  </g>
+  
+  <g id="tree2">
+    <ellipse cx="400" cy="480" rx="90" ry="140" fill="url(#tree)" opacity="0.7"/>
+    <rect x="390" y="480" width="20" height="120" fill="#8B4513"/>
+  </g>
+  
+  <g id="tree3">
+    <ellipse cx="600" cy="520" rx="70" ry="110" fill="url(#tree)" opacity="0.8"/>
+    <rect x="590" y="520" width="20" height="90" fill="#8B4513"/>
+  </g>
+  
+  <g id="tree4">
+    <ellipse cx="800" cy="490" rx="85" ry="130" fill="url(#tree)" opacity="0.7"/>
+    <rect x="790" y="490" width="20" height="110" fill="#8B4513"/>
+  </g>
+  
+  <!-- Community houses -->
+  <g id="house1">
+    <rect x="150" y="450" width="80" height="60" fill="#F5DEB3" stroke="#8B4513" stroke-width="2"/>
+    <polygon points="150,450 190,420 230,450" fill="#8B4513"/>
+    <rect x="170" y="470" width="15" height="25" fill="#87CEEB"/>
+    <rect x="195" y="470" width="15" height="25" fill="#87CEEB"/>
+  </g>
+  
+  <g id="house2">
+    <rect x="350" y="430" width="90" height="70" fill="#F5DEB3" stroke="#8B4513" stroke-width="2"/>
+    <polygon points="350,430 395,395 440,430" fill="#8B4513"/>
+    <rect x="370" y="450" width="20" height="30" fill="#87CEEB"/>
+    <rect x="400" y="450" width="20" height="30" fill="#87CEEB"/>
+  </g>
+  
+  <g id="house3">
+    <rect x="550" y="460" width="85" height="65" fill="#F5DEB3" stroke="#8B4513" stroke-width="2"/>
+    <polygon points="550,460 592.5,425 635,460" fill="#8B4513"/>
+    <rect x="570" y="480" width="18" height="28" fill="#87CEEB"/>
+    <rect x="600" y="480" width="18" height="28" fill="#87CEEB"/>
+  </g>
+  
+  <!-- Path connecting houses -->
+  <path d="M 200 520 Q 300 500 400 520 Q 500 540 600 520 Q 700 500 800 520" 
+        stroke="#D2B48C" stroke-width="8" fill="none" opacity="0.7"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="300" cy="300" r="3" fill="#FFD700" opacity="0.6"/>
+  <circle cx="500" cy="280" r="2" fill="#FFD700" opacity="0.6"/>
+  <circle cx="700" cy="320" r="4" fill="#FFD700" opacity="0.6"/>
+  <circle cx="900" cy="290" r="3" fill="#FFD700" opacity="0.6"/>
+  
+  <!-- Text overlay area (semi-transparent) -->
+  <rect x="50" y="50" width="1100" height="150" fill="rgba(255,255,255,0.1)" rx="20"/>
+</svg>

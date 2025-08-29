@@ -9,6 +9,16 @@ yarn install
 yarn dev
 ```
 
+## Pull Request Previews
+
+When you create a Pull Request, the website will automatically build and deploy to a preview URL. This allows you to review your changes before merging to the main branch.
+
+1. Create a new branch and make your changes
+2. Push your branch and create a Pull Request
+3. The GitHub Action will automatically build and deploy a preview
+4. You'll see a preview URL in the PR comments
+5. Once approved and merged, the changes will deploy to the main site
+
 ## Build
 
 ```shell
