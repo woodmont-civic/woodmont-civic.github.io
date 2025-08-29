@@ -3,6 +3,8 @@ name: Deploy Nuxt site to Pages
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -19,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Detect package manager
         id: detect-package-manager
@@ -36,13 +38,13 @@ jobs:
           fi
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18" # Ensure this matches your local version
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Restore cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
@@ -58,7 +60,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
@@ -68,7 +70,34 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
+
+  # For PRs, we'll use GitHub's built-in preview functionality
+  # The built site will be available as a downloadable artifact
+  # and can be viewed locally or deployed elsewhere if needed
+  build-preview:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: pages-artifact
+          path: ./dist
+
+      - name: Comment PR with Preview Info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview Build Ready!**\n\nThis PR has been built successfully.\n\n**To preview your changes:**\n1. Download the \`pages-artifact\` from the Actions tab\n2. Extract and open \`dist/index.html\` in your browser\n3. Or deploy to a preview service like Vercel/Netlify\n\n**Build Status:** ✅ Successfully built and ready for review`
+            })
+
