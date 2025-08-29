@@ -64,6 +64,19 @@ git push origin my-new-branch
 
 Once your Pull Request is reviewed and merged, your changes will be automatically deployed to the website.
 
+## Deployment Information
+
+**Production Deployment**: The website automatically deploys to GitHub Pages when changes are merged to the `main` branch.
+
+**Preview Deployments**: Currently, there are no automatic preview deployments for Pull Requests. To test changes:
+- Run the site locally using `yarn dev`
+- Or manually deploy to a staging environment for testing
+
+**Adding Files**: To add documents like PDFs:
+1. Place files in the `public/` directory
+2. Reference them directly in your markdown: `/filename.pdf`
+3. Files in `public/` are served directly from the site root
+
 If you have any questions or need help with contributing, please feel free to open an issue. We appreciate your contributions and look forward to working with you!
 
 ---
