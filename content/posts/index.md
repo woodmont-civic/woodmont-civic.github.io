@@ -6,13 +6,14 @@ title: Posts
 
 # Posts
 
+2025
+
+* [September Board Meeting](/posts/2025_09)
+
 2024
 
 * [April Newsletter](/posts/2024_04)
 
-2025
-
-* [September Board Meeting](/posts/2025_09)
 
 2023
 
