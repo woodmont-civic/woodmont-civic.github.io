@@ -10,7 +10,6 @@
   "devDependencies": {
     "@nuxt/content": "^2.13.0",
     "@nuxt/ui-templates": "^1.3.4",
-    "@nuxthq/studio": "^2.2.1",
     "@nuxtjs/google-analytics": "^2.4.0",
     "content-wind": "latest"
   },
