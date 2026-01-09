@@ -17,9 +17,9 @@ title: Posts
 
 2023
 
+* [August Newsletter](/posts/2023_08)
 * [July Board Meeting](/posts/2023_07)
 * [June Board Meeting](/posts/2023_06)
-* [August Newsletter](/posts/2023_08)
 
 2022
 
