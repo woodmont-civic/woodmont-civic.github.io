@@ -3,6 +3,7 @@ export default defineAppConfig({
   cover: '/cover.png',
   socials: {
     github: 'woodmont-civic/woodmont-civic.github.io',
+    facebook: 'https://www.facebook.com/search/top/?q=woodmont%20civic%20association',
   },
   prose: {
     h1: {
