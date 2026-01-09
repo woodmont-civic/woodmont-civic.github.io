@@ -7,14 +7,24 @@ const { data: posts } = await useAsyncData('posts-list', () => {
 })
 
 // Helper to extract year from path or filename
+const latestPost = computed(() => {
+  if (!posts.value || posts.value.length === 0) return null
+  // data is already sorted by _file desc, but let's be safe and use our sorted logic
+  const sorted = [...posts.value].sort((a, b) => b._path.localeCompare(a._path))
+  return sorted[0]
+})
+
 const postsByYear = computed(() => {
   const groups: Record<string, any[]> = {}
   if (!posts.value) return groups
 
-  // Explicitly sort posts by path descending (creates date-descending effect for YYYY_MM files)
+  // Explicitly sort posts by path descending
   const sortedPosts = [...posts.value].sort((a, b) => b._path.localeCompare(a._path))
+  
+  // Exclude the first post as it's the "Featured" one
+  const remainingPosts = sortedPosts.slice(1)
 
-  for (const post of sortedPosts) {
+  for (const post of remainingPosts) {
     let year = 'Recent'
     const match = post._path.match(/\/posts\/(\d{4})/)
     if (match) {
@@ -40,11 +50,40 @@ const postsByYear = computed(() => {
 
 <template>
   <div class="space-y-6 md:space-y-8">
+    
+    <!-- Most Recent / Featured Post -->
+    <div v-if="latestPost" class="relative group">
+      <div class="flex flex-col md:flex-row bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all overflow-hidden border border-gray-100 dark:border-gray-700">
+        <!-- Image placeholder or actual image if available -->
+        <div class="h-40 md:h-auto md:w-1/4 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+            <span class="text-3xl">📰</span>
+        </div>
+        
+        <div class="p-5 md:p-6 flex flex-col justify-center flex-1">
+          <div class="uppercase tracking-wide text-xs text-primary-600 dark:text-primary-400 font-semibold mb-1">
+            Most Recent
+          </div>
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">
+            <NuxtLink :to="latestPost._path">
+              {{ latestPost.navigation?.title || latestPost.title || 'Untitled Post' }}
+            </NuxtLink>
+          </h2>
+          <p v-if="latestPost.description" class="text-gray-600 dark:text-gray-300 mb-4 text-sm md:text-base line-clamp-2">
+            {{ latestPost.description }}
+          </p>
+          <div class="mt-auto">
+             <NuxtLink :to="latestPost._path" class="inline-flex items-center text-sm text-primary-600 dark:text-primary-400 font-medium hover:underline">
+               Read full article <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+             </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline of Previous Posts -->
     <div v-for="group in postsByYear" :key="group.year" class="flex flex-row gap-3 md:gap-8 relative">
       
       <!-- Left: Year Label (Timeline style) -->
-      <!-- Mobile: Rotated year or stacked vertical characters to save width? 
-           Simple rotation is cleanest for "timeline" feel. -->
       <div class="w-8 md:w-24 flex-shrink-0 pt-4 md:pt-2 relative">
         <h3 class="sticky top-24 -ml-2 md:ml-0 text-lg md:text-3xl font-bold text-gray-300 dark:text-gray-700 
                    transform -rotate-90 md:rotate-0 origin-center md:origin-top-left whitespace-nowrap">
