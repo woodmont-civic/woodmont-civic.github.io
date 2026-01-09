@@ -1,12 +1,4 @@
 export default defineNuxtConfig({
-  studio: {
-    repository: {
-      provider: 'github', // 'github' or 'gitlab'
-      owner: 'woodmont-civic',
-      repo: 'woodmont-civic.github.io',
-      branch: 'main'
-    }
-  },
   nitro: {
     prerender: {
       failOnError: false,
