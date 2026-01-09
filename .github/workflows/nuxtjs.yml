@@ -40,7 +40,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18" # Ensure this matches your local version
+          node-version: "22" # Ensure this matches your local version
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Restore cache
