@@ -6,19 +6,19 @@ title: Posts
 
 # Posts
 
-2024
-
-* [April Newsletter](/posts/2024_04)
-
 2025
 
 * [September Board Meeting](/posts/2025_09)
 
+2024
+
+* [April Newsletter](/posts/2024_04)
+
 2023
 
+* [August Newsletter](/posts/2023_08)
 * [July Board Meeting](/posts/2023_07)
 * [June Board Meeting](/posts/2023_06)
-* [August Newsletter](/posts/2023_08)
 
 2022
 
