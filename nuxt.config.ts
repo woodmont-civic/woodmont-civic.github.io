@@ -14,5 +14,12 @@ export default defineNuxtConfig({
       ],
     },
   },
+  modules: [
+    'nuxt-gtag'
+  ],
+  gtag: {
+    // The Google Analytics 4 measurement ID
+    id: 'G-HYRQZ2BGTP'
+  },
   extends: 'content-wind',
 })
