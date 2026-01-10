@@ -2,7 +2,7 @@
 
 Please join us next week for a **Woodmont Civic Association Social**! 🏡✨
 
-🗓️ **Date:** Wednesday, Jan 14th
+🗓️ **Date:** Thursday, Jan 15th
 ⏰ **Time:** 6:30 PM
 📍 **Location:** St. Edward's Catholic Church
 
