@@ -81,12 +81,12 @@ const postsByYear = computed(() => {
     </div>
 
     <!-- Timeline of Previous Posts -->
-    <div v-for="group in postsByYear" :key="group.year" class="flex flex-row gap-3 md:gap-8 relative">
+    <div v-for="group in postsByYear" :key="group.year" class="flex flex-col md:flex-row gap-2 md:gap-8 relative">
       
       <!-- Left: Year Label (Timeline style) -->
-      <div class="w-8 md:w-24 flex-shrink-0 pt-4 md:pt-2 relative">
-        <h3 class="sticky top-24 -ml-2 md:ml-0 text-lg md:text-3xl font-bold text-gray-300 dark:text-gray-700 
-                   transform -rotate-90 md:rotate-0 origin-center md:origin-top-left whitespace-nowrap">
+      <div class="w-full md:w-24 flex-shrink-0 pt-0 md:pt-2 relative mb-2 md:mb-0">
+        <h3 class="static md:sticky top-24 -ml-0 md:-ml-2 text-xl md:text-3xl font-bold text-gray-400 dark:text-gray-600 
+                   md:transform md:-rotate-90 md:origin-top-left whitespace-nowrap">
           {{ group.year }}
         </h3>
       </div>
