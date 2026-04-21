@@ -7,4 +7,5 @@
     <StickyAction />
     <BetaStatus />
   </AppLayout>
+  <PwaInstallBanner />
 </template>
