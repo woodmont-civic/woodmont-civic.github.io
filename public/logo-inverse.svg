@@ -1,0 +1,6 @@
+<svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="50" fill="#1b4d1f"></circle>
+  <path d="M 50 14 C 42 14, 33 16, 30 22 C 26 24, 24 30, 28 34 C 24 36, 24 42, 30 43 C 32 47, 38 46, 42 43 C 41 46, 43 48, 46 47 L 46 56 L 54 56 L 54 47 C 57 48, 59 46, 58 43 C 62 46, 68 47, 70 43 C 76 42, 76 36, 72 34 C 76 30, 74 24, 70 22 C 67 16, 58 14, 50 14 Z" fill="#f5f0e8"></path>
+  <line x1="28" y1="56" x2="72" y2="56" stroke="#f5f0e8" stroke-width="2.5" stroke-linecap="round"></line>
+  <text x="50" y="74" text-anchor="middle" font-size="11.5" font-weight="700" fill="#f5f0e8" letter-spacing="4.5" font-family="&#39;Playfair Display&#39;, Georgia, serif">WCA</text>
+</svg>
