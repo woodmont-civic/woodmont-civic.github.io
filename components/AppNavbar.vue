@@ -50,21 +50,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex justify-between max-w-2xl px-4 py-4 mx-auto sm:px-8">
+  <div class="flex items-center justify-between max-w-2xl px-4 py-4 mx-auto sm:px-8 gap-4">
+    <!-- Brand lockup -->
+    <NuxtLink to="/" class="flex items-center gap-2.5 shrink-0" title="Woodmont Civic Association">
+      <img src="/logo.svg" alt="" class="w-8 h-8 block dark:hidden" width="32" height="32" />
+      <img src="/logo-inverse.svg" alt="" class="w-8 h-8 hidden dark:block" width="32" height="32" />
+      <span class="hidden sm:block leading-none">
+        <span class="wca-wordmark block text-sm">Woodmont</span>
+        <span class="wca-wordmark-sub block text-[9px] mt-0.5">Civic Association</span>
+      </span>
+    </NuxtLink>
     <!-- Navigation -->
-    <div class="text-gray-700 dark:text-gray-200">
+    <div class="text-gray-700 dark:text-gray-200 flex-1 flex flex-wrap justify-end gap-x-5 gap-y-1">
       <NuxtLink
         v-for="link of filteredNavigation"
         :key="link._path"
         :to="link._path"
         active-class="font-bold"
-        class="mr-6"
       >
         {{ link.title }}
       </NuxtLink>
     </div>
     <!-- Social icons & Color Mode -->
-    <div class="space-x-3 transition text-gray-500">
+    <div class="space-x-3 transition text-gray-500 flex items-center shrink-0">
       <a v-if="appConfig.socials?.twitter" :href="`https://twitter.com/${appConfig.socials?.twitter}`" title="Twitter" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:twitter" class="w-5 h-5" /></a>
       <a v-if="appConfig.socials?.github" :href="`https://github.com/${appConfig.socials?.github}`" title="GitHub" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:github" class="w-5 h-5" /></a>
       <a v-if="appConfig.socials?.mastodon" :href="`https://elk.zone/${appConfig.socials?.mastodon}`" title="Mastodon" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:mastodon" class="w-5 h-5" /></a>

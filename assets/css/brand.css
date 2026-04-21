@@ -1,0 +1,55 @@
+/* ============================================================
+   Woodmont Civic Association — Brand Tokens
+   Forest Green brand + Teal accent + Cream + Playfair/Outfit
+   ============================================================ */
+
+:root {
+  /* Forest Green (logo/brand) */
+  --color-forest-50:  #f0f7f0;
+  --color-forest-100: #d6ead7;
+  --color-forest-200: #aed4b0;
+  --color-forest-300: #7cb87f;
+  --color-forest-400: #4e9653;
+  --color-forest-500: #2e7a34;
+  --color-forest-600: #1e5e25;
+  --color-forest-700: #1b4d1f;
+  --color-forest-800: #163d1a;
+  --color-forest-900: #0f2c12;
+
+  /* Cream */
+  --color-cream:      #f5f0e8;
+  --color-cream-dark: #ede8de;
+
+  /* Semantic */
+  --color-brand:        var(--color-forest-700);
+  --color-brand-light:  var(--color-forest-500);
+  --color-brand-dark:   var(--color-forest-900);
+
+  /* Brand fonts */
+  --font-brand-serif: 'Playfair Display', Georgia, serif;
+  --font-brand-sans:  'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-brand-mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Brand utility classes (used by BrandHero and AppNavbar) */
+.wca-wordmark {
+  font-family: var(--font-brand-serif);
+  font-weight: 700;
+  color: var(--color-brand);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.wca-wordmark-sub {
+  font-family: var(--font-brand-serif);
+  font-style: italic;
+  color: var(--color-brand-light);
+}
+
+.dark .wca-wordmark {
+  color: var(--color-cream);
+}
+
+.dark .wca-wordmark-sub {
+  color: rgba(245, 240, 232, 0.7);
+}

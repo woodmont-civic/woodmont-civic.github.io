@@ -1,6 +1,6 @@
 export default defineAppConfig({
   // Configure Content Wind here
-  cover: '/cover.png',
+  cover: '/logo.svg',
   socials: {
     github: 'woodmont-civic/woodmont-civic.github.io',
     facebook: 'https://www.facebook.com/search/top/?q=woodmont%20civic%20association',
