@@ -29,11 +29,41 @@ export default defineNuxtConfig({
     '~/assets/css/brand.css',
   ],
   modules: [
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@vite-pwa/nuxt',
   ],
   gtag: {
     // The Google Analytics 4 measurement ID
     id: 'G-HYRQZ2BGTP'
+  },
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'Woodmont Civic Association',
+      short_name: 'Woodmont',
+      description: 'Official site of the Woodmont Civic Association — news, events, and resources for the Woodmont neighborhood of Bon Air, VA.',
+      theme_color: '#1b4d1f',
+      background_color: '#ffffff',
+      display: 'standalone',
+      start_url: '/',
+      scope: '/',
+      icons: [
+        { src: 'pwa-64x64.png', sizes: '64x64', type: 'image/png' },
+        { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+        { src: 'maskable-icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      ],
+    },
+    workbox: {
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,webmanifest}'],
+    },
+    client: {
+      installPrompt: true,
+    },
+    devOptions: {
+      enabled: false,
+    },
   },
   extends: 'content-wind',
 })
