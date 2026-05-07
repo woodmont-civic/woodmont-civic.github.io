@@ -12,9 +12,7 @@ description: 'Verses from the Woodmont neighborhood, collected by The Warbler.'
 The first poems will appear here once neighbors send them in. Be among the first.
 
 ::div{class="poems-cta"}
-  :::nuxt-link{to="/post-a-poem" class="poems-cta-link"}
-  Post a poem →
-  :::
+:nuxt-link[Post a poem →]{to="/post-a-poem" class="poems-cta-link"}
 ::
 
 <style>

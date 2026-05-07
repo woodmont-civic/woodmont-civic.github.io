@@ -154,7 +154,7 @@ function handleSubmit(event: Event) {
   if (hasErrors.value) {
     return
   }
-  window.location.href = githubUrl.value
+  window.open(githubUrl.value, '_blank', 'noopener,noreferrer')
 }
 
 function fieldError(name: string) {
