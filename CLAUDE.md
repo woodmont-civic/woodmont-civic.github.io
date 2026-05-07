@@ -98,9 +98,11 @@ Any persistent process — `yarn dev`, `yarn generate --watch`, ngrok, file watc
 **Rules:**
 
 1. **Server starts use `run_in_background: true`.** Never wait on the spawning command itself.
-2. **Verify readiness out-of-band.** Use `curl --max-time 3 http://localhost:3000` in a short `until` loop, or `lsof -i :3000`. Do not block on log scraping unless using the `Monitor` tool with a known ready pattern.
-3. **Cap foreground Bash calls.** Pass an explicit `timeout` (e.g. 60000) on anything that should be short — better to fail fast than hang.
-4. **Clean up.** Kill background PIDs you started before exiting an iteration or handing off.
+2. **Verify readiness out-of-band.** Probe with `curl --max-time 3 http://localhost:3000` in a counter loop. macOS does not ship GNU `timeout`, so don't use `timeout 90 bash -c '…'` — use a `for` counter instead: `for i in {1..45}; do curl -s --max-time 3 http://localhost:3000 > /dev/null 2>&1 && break; sleep 2; done`.
+3. **Cap foreground Bash calls.** Pass an explicit `timeout` (e.g. 60000ms) on anything that should be short — better to fail fast than hang.
+4. **Don't kill processes you didn't start.** Before killing an unfamiliar `nuxi dev` (or anything else), check `git worktree list` and `ps -eo pid,etime,command | grep nuxi` — the user often has worktree dev servers going for parallel features. Killing one of those destroys their work-in-progress.
+5. **Multiple Nuxt instances on the same tree exhaust file watchers.** If you see `EMFILE: too many open files, watch`, that's the symptom. The fix is to use exactly one dev server, not to bump per-process ulimits.
+6. **Clean up your own background PIDs** before exiting an iteration or handing off.
 
 This applies especially when running inside `/loop` or under an agent: the parent loop has a wall-clock budget and a hung server burns the whole window.
 
