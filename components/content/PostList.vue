@@ -9,6 +9,11 @@ type Post = {
   featured?: boolean
 }
 
+type Layout = 'list' | 'grid' | 'table'
+
+const LAYOUT_KEY = 'warbler:layout'
+const LAYOUTS: Layout[] = ['list', 'grid', 'table']
+
 const { data: posts } = await useAsyncData('posts-list', () => {
   return queryContent('/posts')
     .where({ _path: { $regex: '^/posts/\\d{4}' } })
@@ -58,12 +63,41 @@ const featuredMeta = computed(() => {
 })
 
 const q = ref('')
+const layout = ref<Layout>('list')
+
+onMounted(() => {
+  try {
+    const saved = localStorage.getItem(LAYOUT_KEY)
+    if (saved && (LAYOUTS as string[]).includes(saved)) {
+      layout.value = saved as Layout
+    }
+  } catch {}
+})
+
+function setLayout(v: Layout) {
+  layout.value = v
+  try { localStorage.setItem(LAYOUT_KEY, v) } catch {}
+}
 
 const archivePosts = computed<Post[]>(() => {
   const list = sortedPosts.value.slice(1)
   const needle = q.value.trim().toLowerCase()
   if (!needle) return list
   return list.filter((p) => {
+    const hay = [
+      p.navigation?.title,
+      p.title,
+      p.description,
+      inferFromPath(p._path).label,
+    ].filter(Boolean).join(' ').toLowerCase()
+    return hay.includes(needle)
+  })
+})
+
+const allFiltered = computed<Post[]>(() => {
+  const needle = q.value.trim().toLowerCase()
+  if (!needle) return sortedPosts.value
+  return sortedPosts.value.filter((p) => {
     const hay = [
       p.navigation?.title,
       p.title,
@@ -131,8 +165,8 @@ function title(p: Post) {
 
     <div class="page">
       <div class="main-col">
-        <!-- Featured -->
-        <article v-if="featured" class="featured">
+        <!-- Featured (only on list layout) -->
+        <article v-if="featured && layout === 'list'" class="featured">
           <div class="issue">Vol. I · No. 1<br>New Series</div>
           <div class="flag">From the Board</div>
           <h2>
@@ -148,48 +182,121 @@ function title(p: Post) {
         <!-- Filter bar -->
         <div class="filterbar">
           <div class="label">Archive</div>
-          <div class="search">
-            <input v-model="q" placeholder="Search issues…" aria-label="Search issues" />
+          <div class="right">
+            <div class="layout-switch" role="group" aria-label="Archive layout">
+              <button
+                type="button"
+                :class="{ on: layout === 'list' }"
+                :aria-pressed="layout === 'list'"
+                @click="setLayout('list')"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                <span>List</span>
+              </button>
+              <button
+                type="button"
+                :class="{ on: layout === 'grid' }"
+                :aria-pressed="layout === 'grid'"
+                @click="setLayout('grid')"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                <span>Covers</span>
+              </button>
+              <button
+                type="button"
+                :class="{ on: layout === 'table' }"
+                :aria-pressed="layout === 'table'"
+                @click="setLayout('table')"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+                <span>Compact</span>
+              </button>
+            </div>
+            <div class="search">
+              <input v-model="q" placeholder="Search issues…" aria-label="Search issues" />
+            </div>
           </div>
         </div>
 
         <!-- Empty state -->
-        <div v-if="archivePosts.length === 0" class="empty">
+        <div v-if="layout === 'list' ? archivePosts.length === 0 : allFiltered.length === 0" class="empty">
           <p v-if="q">No issues match &ldquo;{{ q }}&rdquo;.</p>
           <p v-else>The archive is empty for now — new issues of The Warbler will appear here.</p>
         </div>
 
-        <!-- Year sections -->
-        <section
-          v-for="group in postsByYear"
-          :key="group.year"
-          :id="`year-${group.year}`"
-          class="year-section"
-        >
-          <div class="year-header">
-            <span class="num">{{ group.year }}</span>
-            <span class="count">{{ group.posts.length }} issue{{ group.posts.length > 1 ? 's' : '' }}</span>
-            <span class="line"></span>
-          </div>
-          <div class="issue-list">
-            <NuxtLink
-              v-for="post in group.posts"
-              :key="post._path"
-              :to="post._path"
-              class="issue-row"
-            >
-              <div class="date">{{ inferFromPath(post._path).label }}</div>
-              <div class="body">
-                <div class="title">{{ title(post) }}</div>
-                <div v-if="post.description" class="desc">{{ post.description }}</div>
-                <div class="badges">
-                  <span class="badge" :class="inferType(post)">{{ TYPE_LABEL[inferType(post)] }}</span>
+        <!-- Variant A — List (year-grouped) -->
+        <template v-if="layout === 'list'">
+          <section
+            v-for="group in postsByYear"
+            :key="group.year"
+            :id="`year-${group.year}`"
+            class="year-section"
+          >
+            <div class="year-header">
+              <span class="num">{{ group.year }}</span>
+              <span class="count">{{ group.posts.length }} issue{{ group.posts.length > 1 ? 's' : '' }}</span>
+              <span class="line"></span>
+            </div>
+            <div class="issue-list">
+              <NuxtLink
+                v-for="post in group.posts"
+                :key="post._path"
+                :to="post._path"
+                class="issue-row"
+              >
+                <div class="date">{{ inferFromPath(post._path).label }}</div>
+                <div class="body">
+                  <div class="title">{{ title(post) }}</div>
+                  <div v-if="post.description" class="desc">{{ post.description }}</div>
+                  <div class="badges">
+                    <span class="badge" :class="inferType(post)">{{ TYPE_LABEL[inferType(post)] }}</span>
+                  </div>
                 </div>
-              </div>
-              <div class="arrow">→</div>
-            </NuxtLink>
+                <div class="arrow">→</div>
+              </NuxtLink>
+            </div>
+          </section>
+        </template>
+
+        <!-- Variant B — Cover grid -->
+        <div v-else-if="layout === 'grid'" class="cover-grid">
+          <NuxtLink
+            v-for="post in allFiltered"
+            :key="post._path"
+            :to="post._path"
+            class="cover"
+          >
+            <div class="sheet">
+              <div class="tiny">{{ inferFromPath(post._path).label }} · {{ TYPE_LABEL[inferType(post)] }}</div>
+              <div class="wm"><em>The</em>Warbler</div>
+              <div class="rule"></div>
+              <div class="t">{{ title(post) }}</div>
+              <div v-if="post.description" class="d">{{ post.description }}</div>
+            </div>
+            <div class="foot">
+              <span>{{ inferFromPath(post._path).label }}</span>
+              <span class="read">Read →</span>
+            </div>
+          </NuxtLink>
+        </div>
+
+        <!-- Variant C — Compact table -->
+        <div v-else-if="layout === 'table'" class="table-v">
+          <div class="head">
+            <span>Date</span><span>Title</span><span>Type</span><span></span>
           </div>
-        </section>
+          <NuxtLink
+            v-for="post in allFiltered"
+            :key="post._path"
+            :to="post._path"
+            class="trow"
+          >
+            <div class="d">{{ inferFromPath(post._path).label }}</div>
+            <div class="t">{{ title(post) }}</div>
+            <div><span class="type">{{ TYPE_LABEL[inferType(post)] }}</span></div>
+            <div class="a">→</div>
+          </NuxtLink>
+        </div>
       </div>
 
       <!-- Sidebar -->
@@ -250,6 +357,7 @@ function title(p: Post) {
   --rule: #e5dfd1;
   --rule-soft: #ede6d9;
   --font-serif: var(--font-brand-serif);
+  --font-italic: var(--font-brand-italic);
   --font-sans: var(--font-brand-sans);
   --font-mono: var(--font-brand-mono);
 
@@ -286,24 +394,27 @@ function title(p: Post) {
   font-weight: 700;
   color: var(--forest);
   line-height: 1;
-  letter-spacing: -.015em;
+  letter-spacing: -.005em;
   margin: 0;
 }
 .masthead h1 .the {
   display: block;
-  font-size: 18px;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: .06em;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
   color: var(--forest-light);
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 .masthead .tag {
-  font-family: var(--font-serif);
+  font-family: var(--font-italic);
   font-style: italic;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--ink-mute);
   margin-top: 14px;
+  letter-spacing: .005em;
 }
 .masthead .meta {
   display: flex;
@@ -377,9 +488,9 @@ function title(p: Post) {
   font-size: 34px;
   font-weight: 700;
   color: var(--forest);
-  line-height: 1.15;
+  line-height: 1.2;
   margin: 0 0 10px;
-  letter-spacing: -.01em;
+  letter-spacing: -.005em;
 }
 .featured h2 a { color: inherit; }
 .featured h2 a:hover { color: var(--forest-soft); }
@@ -392,13 +503,14 @@ function title(p: Post) {
   margin-bottom: 16px;
 }
 .featured p {
-  font-family: var(--font-serif);
-  font-size: 17px;
+  font-family: var(--font-italic);
+  font-size: 18px;
   font-style: italic;
   color: var(--ink-soft);
-  line-height: 1.6;
+  line-height: 1.55;
   max-width: 640px;
   margin: 0;
+  font-weight: 400;
 }
 .featured .read {
   display: inline-flex;
@@ -441,12 +553,19 @@ function title(p: Post) {
   border-bottom: 2px solid var(--forest);
   margin-bottom: 4px;
   gap: 16px;
+  flex-wrap: wrap;
 }
 .filterbar .label {
   font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 700;
   color: var(--forest);
+}
+.filterbar .right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 .filterbar .search { display: flex; align-items: center; gap: 14px; }
 .filterbar input {
@@ -457,7 +576,7 @@ function title(p: Post) {
   font-family: var(--font-sans);
   font-size: 13px;
   color: var(--ink);
-  width: 200px;
+  width: 180px;
   max-width: 100%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -466,12 +585,47 @@ function title(p: Post) {
 }
 .filterbar input:focus { border-bottom-color: var(--forest); }
 
+/* Layout switcher */
+.layout-switch {
+  display: inline-flex;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.layout-switch button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 11px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  border-right: 1px solid var(--rule);
+  transition: background 120ms, color 120ms;
+}
+.layout-switch button:last-child { border-right: 0; }
+.layout-switch button:hover {
+  color: var(--forest);
+  background: var(--cream-deep);
+}
+.layout-switch button.on {
+  background: var(--forest);
+  color: var(--cream);
+}
+.layout-switch button.on:hover { background: var(--forest-soft); }
+.layout-switch svg { flex-shrink: 0; }
+
 /* Empty state */
 .empty {
   padding: 40px 8px;
   text-align: center;
   color: var(--ink-mute);
-  font-family: var(--font-serif);
+  font-family: var(--font-italic);
   font-style: italic;
   font-size: 15px;
 }
@@ -581,6 +735,188 @@ function title(p: Post) {
   .year-header .num { font-size: 32px; }
 }
 
+/* Variant B — Cover grid */
+.cover-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+@media (max-width: 880px) {
+  .cover-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .cover-grid { grid-template-columns: 1fr; }
+}
+.cover {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 200ms, box-shadow 200ms;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+}
+.cover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -8px rgba(27, 77, 31, .18);
+}
+.cover .sheet {
+  background: linear-gradient(180deg, var(--forest) 0%, var(--forest) 42%, var(--paper) 42%, var(--paper) 100%);
+  padding: 22px 22px 18px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  color: var(--cream);
+  position: relative;
+}
+.cover .sheet .tiny {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, .6);
+  margin-bottom: 8px;
+}
+.cover .sheet .wm {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--cream);
+  letter-spacing: -.005em;
+}
+.cover .sheet .wm em {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  opacity: .65;
+  margin-bottom: 4px;
+}
+.cover .sheet .rule {
+  height: 2px;
+  background: var(--cream);
+  margin: 12px 0 8px;
+  width: 40%;
+}
+.cover .sheet .t {
+  margin-top: 56px;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.cover .sheet .d {
+  color: var(--ink-mute);
+  font-size: 11px;
+  line-height: 1.4;
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.cover .foot {
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border-top: 1px solid var(--rule);
+}
+.cover .foot .read { color: var(--forest); font-weight: 600; }
+
+/* Variant C — Compact table */
+.table-v {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+.table-v .head {
+  display: grid;
+  grid-template-columns: 110px 1fr 120px 60px;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--cream-deep);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+}
+.trow {
+  display: grid;
+  grid-template-columns: 110px 1fr 120px 60px;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--rule-soft);
+  cursor: pointer;
+  align-items: center;
+  transition: background 120ms;
+  color: inherit;
+}
+.trow:hover { background: var(--cream-deep); }
+.trow:last-child { border-bottom: 0; }
+.trow .d {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink-mute);
+}
+.trow .t {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.trow:hover .t { color: var(--forest); }
+.trow .type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--cream-deep);
+  padding: 3px 8px;
+  border-radius: 99px;
+  justify-self: start;
+  font-weight: 500;
+}
+.trow:hover .type { background: #fff; }
+.trow .a {
+  font-family: var(--font-serif);
+  color: var(--ink-fade);
+  font-size: 18px;
+  justify-self: end;
+  transition: color 120ms, transform 200ms;
+}
+.trow:hover .a { color: var(--forest); transform: translateX(3px); }
+
+@media (max-width: 640px) {
+  .table-v .head,
+  .trow {
+    grid-template-columns: 90px 1fr 80px;
+  }
+  .table-v .head span:last-child,
+  .trow .a { display: none; }
+}
+
 /* Sidebar */
 .sidebar {
   display: flex;
@@ -639,8 +975,10 @@ function title(p: Post) {
   letter-spacing: .08em;
   font-weight: 600;
 }
-.side-card.upload p { font-size: 12px; line-height: 1.55; }
-.side-card.upload .pr {
+.side-card.upload p,
+.side-card.poem p { font-size: 12px; line-height: 1.55; }
+.side-card.upload .pr,
+.side-card.poem .pr {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -655,6 +993,8 @@ function title(p: Post) {
   margin-top: 4px;
   transition: color 150ms, background 150ms;
 }
-.side-card.upload .pr:hover { color: var(--forest); background: #e3dcca; }
-.side-card.upload .pr svg { flex-shrink: 0; }
+.side-card.upload .pr:hover,
+.side-card.poem .pr:hover { color: var(--forest); background: #e3dcca; }
+.side-card.upload .pr svg,
+.side-card.poem .pr svg { flex-shrink: 0; }
 </style>
