@@ -1,6 +1,6 @@
 ---
 navigation.title: 'Poems'
-layout: 'default'
+layout: 'warbler'
 title: 'The Poetry Corner'
 description: 'Verses from the Woodmont neighborhood, collected by The Warbler.'
 ---
