@@ -26,10 +26,9 @@
   --color-brand-dark:   var(--color-forest-900);
 
   /* Brand fonts */
-  --font-brand-serif:  'Playfair Display', Georgia, serif;
-  --font-brand-italic: 'Source Serif 4', Georgia, serif;
-  --font-brand-sans:   'Outfit', ui-sans-serif, system-ui, sans-serif;
-  --font-brand-mono:   'JetBrains Mono', ui-monospace, monospace;
+  --font-brand-serif: 'Playfair Display', Georgia, serif;
+  --font-brand-sans:  'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-brand-mono:  'JetBrains Mono', ui-monospace, monospace;
 }
 
 /* Brand utility classes (used by BrandHero and AppNavbar) */
