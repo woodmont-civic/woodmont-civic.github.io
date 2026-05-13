@@ -91,30 +91,6 @@ yarn generate   # Build static site → ./dist
 
 Merging to `main` auto-deploys to GitHub Pages. A GitHub Release is also created automatically on each merge, with `neighborhood-covenant.pdf` attached as an asset.
 
-## Running long-lived processes (servers, watchers, tunnels)
-
-Any persistent process — `yarn dev`, `yarn generate --watch`, ngrok, file watchers, etc. — never returns on its own, so a foreground Bash call will hang until your wall-clock budget runs out. This has burned past `/loop` runs.
-
-**Rules:**
-
-1. **Server starts use `run_in_background: true`.** Never wait on the spawning command itself.
-2. **Verify readiness out-of-band.** Use `curl --max-time 3 http://localhost:3000` in a short `until` loop, or `lsof -i :3000`. Do not block on log scraping unless using the `Monitor` tool with a known ready pattern.
-3. **Cap foreground Bash calls.** Pass an explicit `timeout` (e.g. 60000) on anything that should be short — better to fail fast than hang.
-4. **Clean up.** Kill background PIDs you started before exiting an iteration or handing off.
-
-This applies especially when running inside `/loop` or under an agent: the parent loop has a wall-clock budget and a hung server burns the whole window.
-
-## Long-running tasks: GitHub issues as state machine
-
-For multi-iteration work (especially `/loop` runs that may restart), use the tracking GitHub issue as the durable state machine. Each iteration should:
-
-1. **Read the issue** to find the latest `### STATE` comment — that's the resume point.
-2. **Do one chunk of work** and commit it to the feature branch.
-3. **Post a new `### STATE` comment** with: what was just done, current branch SHA, what's next, any blockers.
-4. **Open a draft PR** as soon as there's something committed, and link it in the issue. Push screenshots there.
-
-Treat uncommitted working-tree changes as ephemeral — they may not survive a restart. The issue + branch + draft PR are the durable handoff.
-
 ## Campaign Planning
 
 Campaign assets live in `campaigns/`. Each campaign gets a folder:
