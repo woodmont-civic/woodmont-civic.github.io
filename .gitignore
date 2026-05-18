@@ -16,3 +16,8 @@ dist
 .history
 
 hack/
+
+# Claude Code: keep shared automations (skills, hooks, agents, scripts, project settings),
+# ignore user-local settings and the worktree scratch dir.
+.claude/settings.local.json
+.claude/worktrees/
