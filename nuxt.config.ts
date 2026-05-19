@@ -63,7 +63,14 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
-      navigateFallback: '/',
+      // Disable the navigation fallback. This is an SSG site with a precached
+      // HTML file per route, so navigation requests should fall through to the
+      // network (or matching precache entry) — not a single SPA shell. With a
+      // fallback set, any URL not matching a precache entry exactly (e.g.
+      // /posts/ with trailing slash) gets the home page instead of the right
+      // page. Note: @vite-pwa/nuxt defaults this to '/' if the key is absent,
+      // so we must set it explicitly (null cast — Workbox accepts no value).
+      navigateFallback: null as unknown as string,
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,webmanifest}'],
     },
     client: {
