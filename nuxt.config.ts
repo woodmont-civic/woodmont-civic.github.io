@@ -31,7 +31,15 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-gtag',
     '@vite-pwa/nuxt',
+    '@nuxtjs/sitemap',
   ],
+  site: {
+    url: 'https://woodmontbonair.com',
+    name: 'Woodmont Civic Association',
+  },
+  sitemap: {
+    exclude: ['/gallery', '/history', '/news/**'],
+  },
   gtag: {
     // The Google Analytics 4 measurement ID
     id: 'G-HYRQZ2BGTP'
