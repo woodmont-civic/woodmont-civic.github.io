@@ -23,6 +23,28 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap'
         },
       ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Woodmont Civic Association',
+            alternateName: 'WCA',
+            url: 'https://woodmontbonair.com',
+            logo: 'https://woodmontbonair.com/logo.svg',
+            description: 'Official site of the Woodmont Civic Association — news, events, and resources for the Woodmont neighborhood of Bon Air, VA.',
+            email: 'woodmontbonair@gmail.com',
+            areaServed: {
+              '@type': 'Place',
+              name: 'Woodmont, Bon Air, Chesterfield County, Virginia',
+            },
+            sameAs: [
+              'https://www.facebook.com/search/top/?q=woodmont%20civic%20association',
+            ],
+          }),
+        },
+      ],
     },
   },
   css: [
@@ -31,11 +53,21 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-gtag',
     '@vite-pwa/nuxt',
+    // SEO stack — installed à la carte rather than via @nuxtjs/seo because the
+    // bundle pulls in nuxt-og-image, which requires @nuxt/content v3 and would
+    // break the content-wind theme. Organization JSON-LD is hand-rolled in
+    // app.head.script below (the nuxt-schema-org module pulls in @nuxt/ui +
+    // Tailwind v4 via its devtools layer, which conflicts with content-wind's
+    // Tailwind v3).
     '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+    'nuxt-seo-utils',
   ],
   site: {
     url: 'https://woodmontbonair.com',
     name: 'Woodmont Civic Association',
+    description: 'Official site of the Woodmont Civic Association — news, events, and resources for the Woodmont neighborhood of Bon Air, VA.',
+    defaultLocale: 'en',
   },
   sitemap: {
     exclude: ['/gallery', '/history', '/news/**'],
