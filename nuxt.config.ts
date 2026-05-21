@@ -68,6 +68,14 @@ export default defineNuxtConfig({
     name: 'Woodmont Civic Association',
     description: 'Official site of the Woodmont Civic Association — news, events, and resources for the Woodmont neighborhood of Bon Air, VA.',
     defaultLocale: 'en',
+    // GitHub Pages serves directory routes at the trailing-slash form and 301s
+    // /foo → /foo/. Without this, @nuxtjs/sitemap emits /posts/X and
+    // nuxt-seo-utils sets <link rel="canonical" href=".../posts/X">, both of
+    // which redirect to the slash form Google actually serves. That mismatch
+    // is what GSC flags as "Page with redirect" + "Duplicate without
+    // user-selected canonical". Setting this makes both modules emit the
+    // /foo/ form so the canonical, sitemap, and served URL all agree.
+    trailingSlash: true,
   },
   sitemap: {
     exclude: ['/gallery', '/history', '/news/**'],
