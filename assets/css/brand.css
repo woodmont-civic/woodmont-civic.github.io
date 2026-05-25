@@ -118,28 +118,22 @@
 }
 
 .prose.prose h2 {
-  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.9rem);
-  margin: 2.2em 0 0.6em;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--prose-rule);
-}
-
-/* Small editorial mark before each H2 */
-.prose.prose h2::before {
-  content: '§';
-  display: inline-block;
-  margin-right: 0.5em;
-  font-family: var(--font-brand-mono);
-  font-size: 0.65em;
-  color: var(--prose-forest-soft);
-  vertical-align: 0.2em;
-  letter-spacing: 0;
+  font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.8rem);
+  margin: 2.4em 0 0.55em;
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .prose.prose h3 {
-  font-size: 1.35rem;
-  margin: 1.8em 0 0.5em;
+  font-family: var(--font-brand-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--prose-forest-ink);
+  margin: 2em 0 0.5em;
+  border-bottom: 0;
+  text-decoration: none;
 }
 
 .prose.prose h4 {
