@@ -100,7 +100,7 @@ const displayTitle = computed(
 
 <style scoped>
 .article-shell {
-  background: var(--color-cream);
+  background: var(--color-app-bg);
   min-height: 100vh;
   padding: 36px 20px 96px;
 }
@@ -121,7 +121,7 @@ const displayTitle = computed(
   content: '';
   position: absolute;
   inset: 6px;
-  border: 1px solid var(--color-rule-soft);
+  border: 1px solid var(--color-paper-inner);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -146,7 +146,7 @@ const displayTitle = computed(
   transition: color 150ms, transform 200ms;
 }
 .topbar .back:hover {
-  color: var(--color-forest-700);
+  color: var(--color-brand);
 }
 .topbar .back:hover .arrow { transform: translateX(-2px); }
 .topbar .back .arrow {
@@ -160,7 +160,7 @@ const displayTitle = computed(
   text-align: center;
   padding: 0 0 28px;
   margin-bottom: 32px;
-  border-bottom: 3px double var(--color-forest-700);
+  border-bottom: 3px double var(--color-brand);
 }
 
 .kicker {
@@ -180,9 +180,12 @@ const displayTitle = computed(
   padding: 4px 10px;
   border-radius: 99px;
 }
-.kicker .badge.minutes { background: #e8dfd0; color: #6b5d3f; }
-.kicker .badge.social { background: #dbe8dc; color: var(--color-forest-500); }
-.kicker .badge.newsletter { background: #e1ecd8; color: var(--color-forest-700); }
+.kicker .badge.minutes,
+.kicker .badge.social,
+.kicker .badge.newsletter {
+  background: var(--color-cream-dark);
+  color: var(--color-brand);
+}
 .kicker .dot {
   color: var(--color-ink-fade);
   font-size: 12px;
@@ -201,7 +204,7 @@ const displayTitle = computed(
   font-size: clamp(2rem, 1.4rem + 2.8vw, 3rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: var(--color-forest-700);
+  color: var(--color-brand);
   margin: 0 auto 18px;
   max-width: 22ch;
 }
@@ -258,7 +261,7 @@ const displayTitle = computed(
 .article-foot .rule {
   width: 80px;
   height: 1px;
-  background: var(--color-forest-700);
+  background: var(--color-brand);
   margin: 0 auto 18px;
 }
 .article-foot .end {
@@ -274,15 +277,15 @@ const displayTitle = computed(
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-forest-700);
+  color: var(--color-brand);
   text-decoration: none;
-  border-bottom: 2px solid var(--color-forest-700);
+  border-bottom: 2px solid var(--color-brand);
   padding-bottom: 2px;
   transition: color 150ms, border-color 150ms;
 }
 .article-foot .back-link:hover {
-  color: var(--color-forest-500);
-  border-color: var(--color-forest-500);
+  color: var(--color-brand-soft);
+  border-color: var(--color-brand-soft);
 }
 
 @media (max-width: 720px) {
@@ -298,21 +301,11 @@ const displayTitle = computed(
   .byline .rule-piece { flex-basis: 24px; }
 }
 
-/* Dark mode — keep the editorial palette warm but legible */
-:global(.dark) .article-shell { background: #0d1410; }
+/* Dark mode: only the elevation shadow needs a per-component override
+   (surface colours come from the token flip at .dark root). */
 :global(.dark) .article {
-  background: #131c15;
-  border-color: #243027;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.02), 0 12px 32px -20px rgba(0,0,0,0.6);
-}
-:global(.dark) .article::before { border-color: #1c2820; }
-:global(.dark) .article-head { border-bottom-color: #4e9653; }
-:global(.dark) .title { color: #c8e5ca; }
-:global(.dark) .standfirst { color: #b9c2bb; }
-:global(.dark) .kicker .badge { background: rgba(78,150,83,0.18); color: #d6ead7; }
-:global(.dark) .article-foot .rule { background: #4e9653; }
-:global(.dark) .article-foot .back-link {
-  color: #b4e0b6;
-  border-color: #b4e0b6;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.02),
+    0 12px 32px -20px rgba(0, 0, 0, 0.6);
 }
 </style>
