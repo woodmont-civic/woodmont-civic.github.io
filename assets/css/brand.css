@@ -1,10 +1,17 @@
 /* ============================================================
    Woodmont Civic Association — Brand Tokens
-   Forest Green brand + Teal accent + Cream + Playfair/Outfit
+   Forest Green brand + Cream + Playfair/Outfit
+
+   Architecture:
+   * Forest palette (--color-forest-*) is the raw brand colour
+     wheel — never overridden by dark mode.
+   * Semantic tokens (--color-paper, --color-cream, --color-ink,
+     --color-brand, --color-rule, etc.) flip under .dark so
+     every consumer auto-themes without per-component overrides.
    ============================================================ */
 
 :root {
-  /* Forest Green (logo/brand) */
+  /* Forest Green palette (raw, immutable) */
   --color-forest-50:  #f0f7f0;
   --color-forest-100: #d6ead7;
   --color-forest-200: #aed4b0;
@@ -16,28 +23,66 @@
   --color-forest-800: #163d1a;
   --color-forest-900: #0f2c12;
 
-  /* Cream */
-  --color-cream:      #f5f0e8;
-  --color-cream-dark: #ede8de;
+  /* Semantic surfaces — flip in .dark */
+  --color-cream:       #f5f0e8;   /* outside-card / blockquote tint */
+  --color-cream-dark:  #ede8de;   /* slightly stronger tint (code bg) */
+  --color-paper:       #faf8f4;   /* card / article body surface */
+  --color-paper-inner: #ede6d9;   /* the inner double-border line */
 
-  /* Semantic */
-  --color-brand:        var(--color-forest-700);
-  --color-brand-light:  var(--color-forest-500);
-  --color-brand-dark:   var(--color-forest-900);
+  /* Editorial ink — flip in .dark */
+  --color-ink:         #1f2937;
+  --color-ink-soft:    #4b5563;
+  --color-ink-mute:    #6b7280;
+  --color-ink-fade:    #9ca3af;
 
-  /* Editorial ink */
-  --color-ink:        #1f2937;
-  --color-ink-soft:   #4b5563;
-  --color-ink-mute:   #6b7280;
-  --color-ink-fade:   #9ca3af;
-  --color-rule:       #e5dfd1;
-  --color-rule-soft:  #ede6d9;
-  --color-paper:      #faf8f4;
+  /* Rules — flip in .dark */
+  --color-rule:        #e5dfd1;
+  --color-rule-soft:   #ede6d9;
+
+  /* Brand accents on the current surface — flip in .dark */
+  --color-brand:        var(--color-forest-700); /* primary forest */
+  --color-brand-soft:   var(--color-forest-500); /* secondary */
+  --color-brand-strong: var(--color-forest-900); /* darker, for bold ink */
+  --color-brand-fade:   var(--color-forest-400); /* fainter, for kickers */
+
+  /* Back-compat aliases (kept so older selectors don't break) */
+  --color-brand-light:  var(--color-brand-soft);
+  --color-brand-dark:   var(--color-brand-strong);
 
   /* Brand fonts */
   --font-brand-serif: 'Playfair Display', Georgia, serif;
   --font-brand-sans:  'Outfit', ui-sans-serif, system-ui, sans-serif;
   --font-brand-mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Dark theme — only the semantic tokens flip.
+   Goal: warm forest-tinted ink ground, brightened brand accents. */
+.dark {
+  --color-cream:       #1a261c;
+  --color-cream-dark:  #1f2e21;
+  --color-paper:       #16201a;
+  --color-paper-inner: #1f2b22;
+
+  --color-ink:         #e8e2d4;
+  --color-ink-soft:    #c4ccc1;
+  --color-ink-mute:    #969f95;
+  --color-ink-fade:    #6f786f;
+
+  --color-rule:        #2a3a2d;
+  --color-rule-soft:   #1f2b22;
+
+  --color-brand:        #c5e3c6;
+  --color-brand-soft:   #7cb87f;
+  --color-brand-strong: var(--color-forest-100);
+  --color-brand-fade:   #4e9653;
+}
+
+/* App background (outside the page card) — also themes. */
+:root {
+  --color-app-bg: var(--color-cream);
+}
+.dark {
+  --color-app-bg: #0d1410;
 }
 
 /* Brand utility classes (used by BrandHero and AppNavbar) */
@@ -52,22 +97,13 @@
 .wca-wordmark-sub {
   font-family: var(--font-brand-serif);
   font-style: italic;
-  color: var(--color-brand-light);
-}
-
-.dark .wca-wordmark {
-  color: var(--color-cream);
-}
-
-.dark .wca-wordmark-sub {
-  color: rgba(245, 240, 232, 0.7);
+  color: var(--color-brand-soft);
 }
 
 /* ============================================================
    Editorial Prose
-   Applied to every page rendered through .prose (ContentDoc),
-   giving the home page and individual articles the same
-   newspaper-grade typography used by The Warbler.
+   Every page rendered through .prose (ContentDoc) gets the
+   newspaper-grade typography used across the site.
 
    Selectors are doubled (.prose.prose) to outrank Tailwind
    Typography's prose-* utility classes (which compile to the
@@ -75,17 +111,19 @@
    ============================================================ */
 
 .prose.prose {
-  --prose-ink:        var(--color-ink);
-  --prose-ink-soft:   var(--color-ink-soft);
-  --prose-ink-mute:   var(--color-ink-mute);
-  --prose-ink-fade:   var(--color-ink-fade);
-  --prose-rule:       var(--color-rule);
-  --prose-rule-soft:  var(--color-rule-soft);
-  --prose-paper:      var(--color-paper);
-  --prose-forest:     var(--color-forest-700);
-  --prose-forest-ink: var(--color-forest-900);
-  --prose-forest-mid: var(--color-forest-500);
-  --prose-forest-soft:var(--color-forest-400);
+  /* All prose tokens are aliases for the semantic root tokens,
+     so dark mode flows down automatically. */
+  --prose-ink:         var(--color-ink);
+  --prose-ink-soft:    var(--color-ink-soft);
+  --prose-ink-mute:    var(--color-ink-mute);
+  --prose-ink-fade:    var(--color-ink-fade);
+  --prose-rule:        var(--color-rule);
+  --prose-rule-soft:   var(--color-rule-soft);
+  --prose-paper:       var(--color-paper);
+  --prose-forest:      var(--color-brand);
+  --prose-forest-ink:  var(--color-brand-strong);
+  --prose-forest-mid:  var(--color-brand-soft);
+  --prose-forest-soft: var(--color-brand-fade);
 
   font-family: var(--font-brand-sans);
   color: var(--prose-ink);
@@ -96,7 +134,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Headings — Playfair, forest-coloured, with editorial rules */
+/* Headings — Playfair, forest-coloured */
 .prose.prose h1,
 .prose.prose h2,
 .prose.prose h3,
@@ -159,8 +197,7 @@
   color: var(--prose-ink);
 }
 
-/* "Standfirst" — the first paragraph immediately after an H1
-   reads like a magazine deck: larger, serif italic, muted ink. */
+/* Standfirst — first paragraph after H1 */
 .prose.prose h1 + p {
   font-family: var(--font-brand-serif);
   font-style: italic;
@@ -177,14 +214,12 @@
   color: var(--prose-forest-ink);
   font-weight: 700;
 }
-
 .prose.prose em,
 .prose.prose i {
   font-family: var(--font-brand-serif);
   font-style: italic;
   color: inherit;
 }
-
 .prose.prose strong em,
 .prose.prose em strong,
 .prose.prose b i,
@@ -210,7 +245,7 @@
   background-size: 100% 2px;
 }
 
-/* Lists — forest-coloured markers, generous spacing. */
+/* Lists */
 .prose.prose ul,
 .prose.prose ol {
   margin: 0 0 1.2em;
@@ -252,7 +287,6 @@
   border-right: 1px solid var(--prose-rule);
 }
 
-/* Nested lists */
 .prose.prose ul ul,
 .prose.prose ol ul,
 .prose.prose ul ol,
@@ -340,36 +374,10 @@
   border-bottom: 1px solid var(--prose-rule);
   vertical-align: top;
 }
-.prose.prose tbody tr:nth-child(even) td { background: var(--prose-paper); }
+.prose.prose tbody tr:nth-child(even) td { background: var(--color-cream); }
 
 /* Images */
 .prose.prose img {
   border-radius: 4px;
   margin: 1.4em 0;
 }
-
-/* Dark mode — keep the editorial feel against a deep ink ground */
-.dark .prose.prose {
-  --prose-ink:        #e8eae7;
-  --prose-ink-soft:   #c5cbc4;
-  --prose-ink-mute:   #9aa39a;
-  --prose-ink-fade:   #6f7670;
-  --prose-rule:       #2b3a2f;
-  --prose-rule-soft:  #1f2b22;
-  --prose-paper:      #131c15;
-  --prose-forest:     #b4e0b6;
-  --prose-forest-ink: var(--color-cream);
-  --prose-forest-mid: #7cb87f;
-  --prose-forest-soft:#4e9653;
-}
-.dark .prose.prose strong,
-.dark .prose.prose b { color: var(--color-cream); }
-.dark .prose.prose blockquote {
-  background: rgba(46, 122, 52, 0.08);
-  color: var(--prose-ink-soft);
-}
-.dark .prose.prose code {
-  background: rgba(78, 150, 83, 0.15);
-  color: #d6ead7;
-}
-.dark .prose.prose tbody tr:nth-child(even) td { background: rgba(255,255,255,0.02); }

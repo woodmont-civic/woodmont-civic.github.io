@@ -26,7 +26,7 @@ defineProps<{
   margin: 1.6em 0 2em;
   padding: 18px 22px;
   background: var(--color-cream);
-  border-left: 3px solid var(--color-forest-700);
+  border-left: 3px solid var(--color-brand);
   border-radius: 2px;
   font-family: var(--font-brand-sans);
   font-size: 0.95rem;
@@ -39,7 +39,7 @@ defineProps<{
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-forest-500);
+  color: var(--color-brand-soft);
   padding-top: 0.25em;
   align-self: start;
 }
@@ -58,11 +58,4 @@ defineProps<{
   .fact-sheet dt { padding-top: 0.6em; }
   .fact-sheet dt:first-child { padding-top: 0; }
 }
-
-:global(.dark) .fact-sheet {
-  background: rgba(46, 122, 52, 0.08);
-  border-left-color: #7cb87f;
-}
-:global(.dark) .fact-sheet dt { color: #7cb87f; }
-:global(.dark) .fact-sheet dd { color: #e8eae7; }
 </style>

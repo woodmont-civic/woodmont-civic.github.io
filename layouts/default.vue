@@ -8,7 +8,7 @@
 
 <style scoped>
 .page-shell {
-  background: var(--color-cream);
+  background: var(--color-app-bg);
   min-height: 100vh;
   padding: 36px 20px 96px;
 }
@@ -29,7 +29,7 @@
   content: '';
   position: absolute;
   inset: 6px;
-  border: 1px solid var(--color-rule-soft);
+  border: 1px solid var(--color-paper-inner);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -45,12 +45,10 @@
   .page-card { padding: 22px 18px 40px; }
 }
 
-/* Dark mode parity with the article layout */
-:global(.dark) .page-shell { background: #0d1410; }
+/* Dark mode card shadow: replace warm shadow with a deeper one */
 :global(.dark) .page-card {
-  background: #131c15;
-  border-color: #243027;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.02), 0 12px 32px -20px rgba(0,0,0,0.6);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.02),
+    0 12px 32px -20px rgba(0, 0, 0, 0.6);
 }
-:global(.dark) .page-card::before { border-color: #1c2820; }
 </style>
