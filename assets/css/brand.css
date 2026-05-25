@@ -25,6 +25,15 @@
   --color-brand-light:  var(--color-forest-500);
   --color-brand-dark:   var(--color-forest-900);
 
+  /* Editorial ink */
+  --color-ink:        #1f2937;
+  --color-ink-soft:   #4b5563;
+  --color-ink-mute:   #6b7280;
+  --color-ink-fade:   #9ca3af;
+  --color-rule:       #e5dfd1;
+  --color-rule-soft:  #ede6d9;
+  --color-paper:      #faf8f4;
+
   /* Brand fonts */
   --font-brand-serif: 'Playfair Display', Georgia, serif;
   --font-brand-sans:  'Outfit', ui-sans-serif, system-ui, sans-serif;
@@ -53,3 +62,320 @@
 .dark .wca-wordmark-sub {
   color: rgba(245, 240, 232, 0.7);
 }
+
+/* ============================================================
+   Editorial Prose
+   Applied to every page rendered through .prose (ContentDoc),
+   giving the home page and individual articles the same
+   newspaper-grade typography used by The Warbler.
+
+   Selectors are doubled (.prose.prose) to outrank Tailwind
+   Typography's prose-* utility classes (which compile to the
+   same single-class specificity and load after our brand CSS).
+   ============================================================ */
+
+.prose.prose {
+  --prose-ink:        var(--color-ink);
+  --prose-ink-soft:   var(--color-ink-soft);
+  --prose-ink-mute:   var(--color-ink-mute);
+  --prose-ink-fade:   var(--color-ink-fade);
+  --prose-rule:       var(--color-rule);
+  --prose-rule-soft:  var(--color-rule-soft);
+  --prose-paper:      var(--color-paper);
+  --prose-forest:     var(--color-forest-700);
+  --prose-forest-ink: var(--color-forest-900);
+  --prose-forest-mid: var(--color-forest-500);
+  --prose-forest-soft:var(--color-forest-400);
+
+  font-family: var(--font-brand-sans);
+  color: var(--prose-ink);
+  font-size: 17px;
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings — Playfair, forest-coloured, with editorial rules */
+.prose.prose h1,
+.prose.prose h2,
+.prose.prose h3,
+.prose.prose h4,
+.prose.prose h5,
+.prose.prose h6 {
+  font-family: var(--font-brand-serif);
+  color: var(--prose-forest);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.prose.prose h1 {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  margin: 0 0 0.75em;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px double var(--prose-forest);
+}
+
+.prose.prose h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.9rem);
+  margin: 2.2em 0 0.6em;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--prose-rule);
+}
+
+/* Small editorial mark before each H2 */
+.prose.prose h2::before {
+  content: '§';
+  display: inline-block;
+  margin-right: 0.5em;
+  font-family: var(--font-brand-mono);
+  font-size: 0.65em;
+  color: var(--prose-forest-soft);
+  vertical-align: 0.2em;
+  letter-spacing: 0;
+}
+
+.prose.prose h3 {
+  font-size: 1.35rem;
+  margin: 1.8em 0 0.5em;
+  color: var(--prose-forest-ink);
+}
+
+.prose.prose h4 {
+  font-family: var(--font-brand-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--prose-forest-mid);
+  margin: 1.6em 0 0.4em;
+}
+
+.prose.prose h5,
+.prose.prose h6 {
+  font-size: 1.05rem;
+  margin: 1.4em 0 0.3em;
+  color: var(--prose-forest-ink);
+}
+
+/* Body paragraphs */
+.prose.prose p {
+  margin: 0 0 1.1em;
+  color: var(--prose-ink);
+}
+
+/* "Standfirst" — the first paragraph immediately after an H1
+   reads like a magazine deck: larger, serif italic, muted ink. */
+.prose.prose h1 + p {
+  font-family: var(--font-brand-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--prose-ink-soft);
+  margin-bottom: 1.4em;
+  max-width: 60ch;
+}
+
+/* Inline emphasis */
+.prose.prose strong,
+.prose.prose b {
+  color: var(--prose-forest-ink);
+  font-weight: 700;
+}
+
+.prose.prose em,
+.prose.prose i {
+  font-family: var(--font-brand-serif);
+  font-style: italic;
+  color: inherit;
+}
+
+.prose.prose strong em,
+.prose.prose em strong,
+.prose.prose b i,
+.prose.prose i b {
+  color: var(--prose-forest);
+}
+
+/* Links — subtle forest underline that thickens on hover. */
+.prose.prose a {
+  color: var(--prose-forest);
+  text-decoration: none;
+  border: 0;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  padding-bottom: 1px;
+  font-weight: 500;
+  transition: color 150ms, background-size 200ms;
+}
+.prose.prose a:hover {
+  color: var(--prose-forest-mid);
+  background-size: 100% 2px;
+}
+
+/* Lists — forest-coloured markers, generous spacing. */
+.prose.prose ul,
+.prose.prose ol {
+  margin: 0 0 1.2em;
+  padding-left: 1.4em;
+}
+.prose.prose ul > li,
+.prose.prose ol > li {
+  margin: 0.45em 0;
+  padding-left: 0.25em;
+}
+.prose.prose ul > li::marker {
+  color: var(--prose-forest-mid);
+  content: '◆  ';
+  font-size: 0.65em;
+}
+.prose.prose ol {
+  list-style: none;
+  counter-reset: wca-counter;
+  padding-left: 0;
+}
+.prose.prose ol > li {
+  counter-increment: wca-counter;
+  position: relative;
+  padding-left: 2.6em;
+}
+.prose.prose ol > li::before {
+  content: counter(wca-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  font-family: var(--font-brand-mono);
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--prose-forest-mid);
+  width: 2em;
+  text-align: right;
+  padding-right: 0.6em;
+  border-right: 1px solid var(--prose-rule);
+}
+
+/* Nested lists */
+.prose.prose ul ul,
+.prose.prose ol ul,
+.prose.prose ul ol,
+.prose.prose ol ol {
+  margin: 0.4em 0 0.4em;
+}
+
+/* Blockquote — newspaper pull-quote */
+.prose.prose blockquote {
+  margin: 1.6em 0;
+  padding: 1.1em 1.4em;
+  background: var(--color-cream);
+  border-left: 4px solid var(--prose-forest);
+  border-radius: 2px;
+  font-family: var(--font-brand-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--prose-ink-soft);
+  quotes: none;
+}
+.prose.prose blockquote p { margin: 0; }
+.prose.prose blockquote p + p { margin-top: 0.6em; }
+.prose.prose blockquote p::before,
+.prose.prose blockquote p::after { content: ''; }
+
+/* Horizontal rule */
+.prose.prose hr {
+  border: 0;
+  height: 0;
+  margin: 2.4em auto;
+  width: 60%;
+  border-top: 3px double var(--prose-forest);
+}
+
+/* Inline code & code blocks */
+.prose.prose code {
+  font-family: var(--font-brand-mono);
+  font-size: 0.9em;
+  background: var(--color-cream-dark);
+  color: var(--prose-forest-ink);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.prose.prose code::before,
+.prose.prose code::after { content: ''; }
+.prose.prose pre {
+  background: #14241a;
+  color: #e6f0e8;
+  font-family: var(--font-brand-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  padding: 1.1em 1.3em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.2em 0;
+}
+.prose.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Tables */
+.prose.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.95em;
+}
+.prose.prose th {
+  font-family: var(--font-brand-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--prose-forest);
+  text-align: left;
+  padding: 0.6em 0.9em;
+  border-bottom: 2px solid var(--prose-forest);
+}
+.prose.prose td {
+  padding: 0.7em 0.9em;
+  border-bottom: 1px solid var(--prose-rule);
+  vertical-align: top;
+}
+.prose.prose tbody tr:nth-child(even) td { background: var(--prose-paper); }
+
+/* Images */
+.prose.prose img {
+  border-radius: 4px;
+  margin: 1.4em 0;
+}
+
+/* Dark mode — keep the editorial feel against a deep ink ground */
+.dark .prose.prose {
+  --prose-ink:        #e8eae7;
+  --prose-ink-soft:   #c5cbc4;
+  --prose-ink-mute:   #9aa39a;
+  --prose-ink-fade:   #6f7670;
+  --prose-rule:       #2b3a2f;
+  --prose-rule-soft:  #1f2b22;
+  --prose-paper:      #131c15;
+  --prose-forest:     #b4e0b6;
+  --prose-forest-ink: var(--color-cream);
+  --prose-forest-mid: #7cb87f;
+  --prose-forest-soft:#4e9653;
+}
+.dark .prose.prose strong,
+.dark .prose.prose b { color: var(--color-cream); }
+.dark .prose.prose blockquote {
+  background: rgba(46, 122, 52, 0.08);
+  color: var(--prose-ink-soft);
+}
+.dark .prose.prose code {
+  background: rgba(78, 150, 83, 0.15);
+  color: #d6ead7;
+}
+.dark .prose.prose tbody tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
