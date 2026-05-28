@@ -75,7 +75,7 @@ onMounted(() => {
     <!-- Social icons & Color Mode -->
     <div class="space-x-3 transition text-gray-500 flex items-center shrink-0">
       <a v-if="appConfig.socials?.facebook" :href="appConfig.socials?.facebook" target="_blank" rel="noopener" title="Facebook" class="w-5 h-5 overflow-hidden dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:facebook" class="w-5 h-5" /></a>
-      <a v-if="appConfig.socials?.nextdoor" :href="appConfig.socials?.nextdoor" target="_blank" rel="noopener" title="Nextdoor" class="w-5 h-5 overflow-hidden dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="cib:nextdoor" class="w-5 h-5" /></a>
+      <a v-if="appConfig.socials?.nextdoor" :href="appConfig.socials?.nextdoor" target="_blank" rel="noopener" title="Nextdoor" class="w-5 h-5 overflow-hidden dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="simple-icons:nextdoor" class="w-5 h-5" /></a>
       <a v-if="appConfig.socials?.github" :href="`https://github.com/${appConfig.socials?.github}`" target="_blank" rel="noopener" title="GitHub" class="w-5 h-5 overflow-hidden dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:github" class="w-5 h-5" /></a>
       <ColorModeSwitch class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300" />
     </div>
