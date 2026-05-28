@@ -74,8 +74,9 @@ onMounted(() => {
     </div>
     <!-- Social icons & Color Mode -->
     <div class="space-x-3 transition text-gray-500 flex items-center shrink-0">
-      <a v-if="appConfig.socials?.twitter" :href="`https://twitter.com/${appConfig.socials?.twitter}`" title="Twitter" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:twitter" class="w-5 h-5" /></a>
-      <a v-if="appConfig.socials?.mastodon" :href="`https://elk.zone/${appConfig.socials?.mastodon}`" title="Mastodon" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:mastodon" class="w-5 h-5" /></a>
+      <a v-if="appConfig.socials?.facebook" :href="appConfig.socials?.facebook" target="_blank" rel="noopener" title="Facebook" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:facebook" class="w-5 h-5" /></a>
+      <a v-if="appConfig.socials?.nextdoor" :href="appConfig.socials?.nextdoor" target="_blank" rel="noopener" title="Nextdoor" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:nextdoor" class="w-5 h-5" /></a>
+      <a v-if="appConfig.socials?.github" :href="`https://github.com/${appConfig.socials?.github}`" target="_blank" rel="noopener" title="GitHub" class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300"><Icon name="fa-brands:github" class="w-5 h-5" /></a>
       <ColorModeSwitch class="dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300" />
     </div>
   </div>
