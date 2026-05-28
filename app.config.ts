@@ -4,7 +4,6 @@ export default defineAppConfig({
   socials: {
     github: 'woodmont-civic/woodmont-civic.github.io',
     facebook: 'https://www.facebook.com/profile.php?id=100064680700200',
-    nextdoor: 'https://nextdoor.com/neighborhood/woodmontnorthchesterfield--north-chesterfield--va/',
   },
   prose: {
     h1: {
