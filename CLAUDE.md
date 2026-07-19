@@ -2,7 +2,7 @@
 
 Official website for the **Woodmont Civic Association (WCA)**, a neighborhood civic organization in Chesterfield County, VA. Static Nuxt 3 site deployed to GitHub Pages.
 
-- **Live**: woodmontbonair.com · **Dues**: https://www.paypal.com/ncp/payment/3X4HQ7H6ATYGQ ($20/household)
+- **Live**: woodmontbonair.com · **Dues**: pay.woodmontbonair.com ($20/household)
 - **WCA email**: woodmontbonair@gmail.com · **Board**: board@woodmontbonair.com
 
 ## Who you're working with

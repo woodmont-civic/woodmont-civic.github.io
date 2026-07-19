@@ -84,7 +84,7 @@ onUnmounted(() => {
         </p>
       </div>
       <a 
-        href="https://www.paypal.com/ncp/payment/3X4HQ7H6ATYGQ" 
+        href="https://pay.woodmontbonair.com" 
         target="_blank" 
         rel="noopener noreferrer"
         class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-primary-500/30 transition-all active:scale-95"
