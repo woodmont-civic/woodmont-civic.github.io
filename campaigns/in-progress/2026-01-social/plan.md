@@ -44,4 +44,4 @@ Located in `campaign_planning/print_assets/`
 ## Verification Plan
 ### Manual Verification
 - **Read-through**: Verify tone is consistent (friendly, organized).
-- **Link Check**: Ensure all proposed QR code destinations (pay.woodmontbonair.com) are live and active.
+- **Link Check**: Ensure all proposed QR code destinations (https://www.paypal.com/ncp/payment/3X4HQ7H6ATYGQ) are live and active.
