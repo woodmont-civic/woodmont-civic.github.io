@@ -1,6 +1,6 @@
 /* ============================================================
    Woodmont Civic Association — Brand Tokens
-   Forest Green brand + Cream + Source Serif/Outfit
+   Forest Green brand + Cream + Playfair/Outfit
 
    Architecture:
    * Forest palette (--color-forest-*) is the raw brand colour
@@ -51,7 +51,7 @@
   --color-brand-dark:   var(--color-brand-strong);
 
   /* Brand fonts */
-  --font-brand-serif: 'Source Serif 4', Georgia, serif;
+  --font-brand-serif: 'Playfair Display', Georgia, serif;
   --font-brand-sans:  'Outfit', ui-sans-serif, system-ui, sans-serif;
   --font-brand-mono:  'JetBrains Mono', ui-monospace, monospace;
 }
@@ -129,7 +129,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Headings — Source Serif, forest-coloured */
+/* Headings — Playfair, forest-coloured */
 .prose.prose h1,
 .prose.prose h2,
 .prose.prose h3,
@@ -375,12 +375,4 @@
 .prose.prose img {
   border-radius: 4px;
   margin: 1.4em 0;
-}
-
-/* Full-width home page bands share one content width and gutter */
-.wrap {
-  max-width: 1080px;
-  margin-inline: auto;
-  padding-left: max(20px, env(safe-area-inset-left, 0px));
-  padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
