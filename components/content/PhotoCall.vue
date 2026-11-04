@@ -2,7 +2,7 @@
   <div class="photo-call">
     <p class="label">Woodmont then and now</p>
     <h3 class="title">Have old neighborhood photos?</h3>
-    <p>We're collecting pictures from past parties, holidays, and gatherings to share here and at upcoming events. Bring prints to Fall Fest, or email scans to <a href="mailto:board@woodmontbonair.com">board@woodmontbonair.com</a>.</p>
+    <p>We're collecting pictures from past parties, holidays, and gatherings to share online and at upcoming events. Bring prints to Fall Fest, or email scans to <a href="mailto:board@woodmontbonair.com">board@woodmontbonair.com</a>.</p>
   </div>
 </template>
 

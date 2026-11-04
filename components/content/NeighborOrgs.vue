@@ -8,11 +8,11 @@
       </div>
       <div>
         <dt><a href="https://woodmont4fun.org" target="_blank" rel="noopener">Woodmont Recreation Association</a></dt>
-        <dd>Owns and runs the pool and recreation building on Traymore Road.</dd>
+        <dd>Owns and runs the pool, the recreation building, and the land behind them on Traymore Road.</dd>
       </div>
       <div>
         <dt><a href="https://woodmontfriends.org" target="_blank" rel="noopener">Friends of Woodmont Park</a></dt>
-        <dd>A nonprofit restoring the courts, field, and trails behind the pool.</dd>
+        <dd>A volunteer nonprofit restoring the courts, field, and trails on WRA land behind the pool.</dd>
       </div>
     </dl>
     <p class="note">They're separate organizations that work together.</p>
