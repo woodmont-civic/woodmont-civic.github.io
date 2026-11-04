@@ -50,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex items-center justify-between max-w-2xl px-4 py-4 mx-auto sm:px-8 gap-4">
+  <div class="flex items-center justify-between max-w-[1080px] px-5 py-4 mx-auto gap-4">
     <!-- Brand lockup -->
     <NuxtLink to="/" class="flex items-center gap-2.5 shrink-0" title="Woodmont Civic Association">
       <img src="/logo.svg" alt="" class="w-8 h-8 block dark:hidden" width="32" height="32" />
