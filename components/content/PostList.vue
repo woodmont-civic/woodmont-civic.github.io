@@ -284,7 +284,7 @@ function title(p: Post) {
 .masthead h1 .the {
   display: block;
   font-size: 18px;
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   letter-spacing: .06em;
   color: var(--forest-light);
@@ -292,7 +292,7 @@ function title(p: Post) {
 }
 .masthead .tag {
   font-family: var(--font-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 15px;
   color: var(--ink-mute);
   margin-top: 14px;
@@ -386,7 +386,7 @@ function title(p: Post) {
 .featured p {
   font-family: var(--font-serif);
   font-size: 17px;
-  font-style: italic;
+  font-style: normal;
   color: var(--ink-soft);
   line-height: 1.6;
   max-width: 640px;
@@ -464,7 +464,7 @@ function title(p: Post) {
   text-align: center;
   color: var(--ink-mute);
   font-family: var(--font-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 15px;
 }
 

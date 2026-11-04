@@ -211,7 +211,7 @@ const displayTitle = computed(
 
 .standfirst {
   font-family: var(--font-brand-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 1.15rem;
   line-height: 1.55;
   color: var(--color-ink-soft);
@@ -266,7 +266,7 @@ const displayTitle = computed(
 }
 .article-foot .end {
   font-family: var(--font-brand-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 0.95rem;
   color: var(--color-ink-fade);
   margin: 0 0 20px;

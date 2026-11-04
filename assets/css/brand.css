@@ -91,7 +91,7 @@
 
 .wca-wordmark-sub {
   font-family: var(--font-brand-serif);
-  font-style: italic;
+  font-style: normal;
   color: var(--color-brand-soft);
 }
 
@@ -195,7 +195,7 @@
 /* Standfirst — first paragraph after H1 */
 .prose.prose h1 + p {
   font-family: var(--font-brand-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 1.2rem;
   line-height: 1.55;
   color: var(--prose-ink-soft);
@@ -211,7 +211,7 @@
 }
 .prose.prose em,
 .prose.prose i {
-  font-family: var(--font-brand-serif);
+  font-family: inherit;
   font-style: italic;
   color: inherit;
 }
@@ -297,7 +297,7 @@
   border-left: 4px solid var(--prose-forest);
   border-radius: 2px;
   font-family: var(--font-brand-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 1.1rem;
   line-height: 1.55;
   color: var(--prose-ink-soft);
