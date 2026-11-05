@@ -11,6 +11,7 @@ const links: Link[] = [
   { label: 'Pay Dues', href: '#dues' },
   { label: 'Purpose', href: '#purpose' },
   { label: 'Membership', href: '/registration' },
+  { label: 'Member Page', href: 'https://members.woodmontbonair.com/portal' },
 ]
 </script>
 
