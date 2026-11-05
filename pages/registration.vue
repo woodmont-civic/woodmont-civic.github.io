@@ -1,29 +1,29 @@
-
 <template>
-  <!-- <main>
-  </main> -->
-  <div class="form-container" >
-    <ContentDoc />
+  <div class="form-container">
+    <div class="prose dark:prose-invert">
+      <ContentDoc />
+    </div>
+    <div class="my-6 flex flex-wrap gap-3">
+      <a
+        href="https://admin.woodmontbonair.com/register"
+        class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-3 font-medium text-white no-underline hover:bg-primary-800 transition-colors"
+      >
+        Sign up
+      </a>
+      <a
+        href="https://pay.woodmontbonair.com"
+        class="inline-flex items-center rounded-lg border border-gray-300 dark:border-gray-600 px-5 py-3 font-medium text-gray-800 dark:text-gray-100 no-underline hover:border-primary-500 transition-colors"
+      >
+        Pay dues
+      </a>
+    </div>
   </div>
-
-  <div v-html="formHTML" class="form-container"></div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      formHTML: '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScJrB_a_jYypj_mwhksILpFXPCk_7Tzb72PuEe-Q382SDke3Q/viewform?embedded=true" width="640" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>', // The embed code from Google Forms goes here
-    };
-  },
-};
-</script>
 
 <style scoped>
 .form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; /* Adjust this as needed */
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
 }
 </style>
