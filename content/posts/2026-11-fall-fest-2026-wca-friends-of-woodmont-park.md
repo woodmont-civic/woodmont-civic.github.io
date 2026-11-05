@@ -27,7 +27,7 @@ FWP's first volunteer cleanup day is the week after Fall Fest. Sign up at the FW
 
 Closer to the street, WCA is beginning work to refresh the neighborhood entrances with new plantings. It's a simple, welcoming improvement you'll start to see at the entrance beds in the months ahead. If you have suggestions for plantings or design be sure to reach out now! 
 
-> **Lend a hand** — We're looking for a neighbor, a family, or a whole block to decorate the entrances for the holidays. If that sounds fun, find us at Fall Fest or just reply to this email.
+> **Lend a hand** — We're looking for a neighbor, a family, or a whole block to decorate the entrances for the holidays. If that sounds fun, find us at Fall Fest or email info@woodmontbonair.com.
 
 ## More to come from WCA
 
@@ -43,7 +43,7 @@ Dues go to WCA, which is separate from WRA and FWP, and they aren't tax-deductib
 
 ## Your new member page
 
-We've set up a new member page where you can check your dues status and keep your address up to date. Sign in at members.woodmontbonair.com with this email address. It's brand new, and we don't have older payments on file yet, so if something looks off, just reply and let us know.
+We've set up a new member page where you can check your dues status and keep your address up to date. Sign in at members.woodmontbonair.com with the email address we have on file for you. It's brand new, and we don't have older payments on file yet, so if something looks off, email us at info@woodmontbonair.com.
 
 New to the neighborhood, or moved here from another address? You can sign up at woodmontbonair.com/registration.
 
