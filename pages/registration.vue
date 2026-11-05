@@ -17,6 +17,10 @@
         Pay dues
       </a>
     </div>
+    <p class="text-sm text-gray-600 dark:text-gray-300">
+      Already a member? Check your dues status and update your address on
+      <a href="https://members.woodmontbonair.com/portal" class="underline">your member page</a>.
+    </p>
   </div>
 </template>
 
