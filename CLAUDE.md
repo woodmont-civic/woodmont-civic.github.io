@@ -1,130 +1,105 @@
 # Woodmont Civic Association — Claude Code Context
 
-## Project Overview
+Official website for the **Woodmont Civic Association (WCA)**, a neighborhood civic organization in Chesterfield County, VA. Static Nuxt 3 site deployed to GitHub Pages.
 
-This is the official website for the **Woodmont Civic Association (WCA)**, a neighborhood civic organization in Chesterfield County, VA. The site is built with Nuxt.js 3 + Content Wind and deployed as a static site on GitHub Pages.
+- **Live**: woodmontbonair.com · **Dues**: pay.woodmontbonair.com ($20/household)
+- **WCA email**: woodmontbonair@gmail.com · **Board**: board@woodmontbonair.com
 
-- **Live site**: woodmontbonair.com (GitHub Pages)
-- **WCA email**: woodmontbonair@gmail.com
-- **Board contact**: board@woodmontbonair.com
-- **Dues payments**: pay.woodmontbonair.com
-- **Annual dues**: $20/household
+## Who you're working with
 
-## Who You're Working With
+The user is the **President of the WCA**. A companion **Claude Web project** holds longer-form WCA strategy and campaign history — reference it when relevant.
 
-The user is the **President of the Woodmont Civic Association**. There is also a companion **Claude Web project** for WCA with additional context and longer-form strategy — reference it for campaign history and community notes when relevant.
+Apply the presidential lens to anything community-facing:
 
-When drafting communications or making content decisions, apply the presidential lens:
-
-- **Tone**: Welcoming, professional, optimistic — "presidential but neighborly"
+- **Tone**: welcoming, professional, optimistic — "presidential but neighborly"
 - **North star**: "How does this help our neighbors?"
-- **Avoid over-engineering**: The association runs on volunteer time and $20 dues
-- **Represent the Board**: Spelling, grammar, and professionalism matter in all public-facing content
+- **Don't over-engineer**: the association runs on volunteer time and $20 dues
+- **Represent the Board**: spelling, grammar, and professionalism matter
 
-**Campaign Review Checklist** (for any community-facing copy):
-- Is it clear?
-- Is the Call to Action obvious?
-- Does it feel welcoming to new neighbors?
-- Is spelling/grammar perfect?
+**Campaign Review Checklist** — any public-facing copy:
+1. Is it clear?
+2. Is the CTA obvious?
+3. Does it feel welcoming to new neighbors?
+4. Is spelling/grammar perfect?
 
-## Communication Channels
+## Communication channels
 
 - **Neighborhood Google Group**: woodmont-neighborhood@googlegroups.com (moderated, community-facing)
-- **Board Google Group**: woodmontbonair@googlegroups.com (internal board communications)
-- **Neighborhood Watch**: Monthly reports from Corporal Craig Eckrich, Chesterfield County
-- **Social platforms**: Facebook, Nextdoor
+- **Board Google Group**: woodmontbonair@googlegroups.com (internal)
+- **Neighborhood Watch**: monthly reports from Corporal Craig Eckrich, Chesterfield County
+- **Social**: Facebook, Nextdoor
 
-## Tech Stack
+## Stack
 
-- **Framework**: Nuxt.js 3 with Content Wind theme (markdown-driven)
-- **Content**: @nuxt/content v2 — Markdown + MDC (Vue components in Markdown)
-- **Styling**: TailwindCSS + Pinceau design tokens (primary color: teal)
-- **Analytics**: Google Analytics 4 via nuxt-gtag (ID: G-HYRQZ2BGTP)
-- **Hosting**: GitHub Pages, deployed via `yarn generate` → static HTML
-- **CI/CD**: GitHub Actions (`.github/workflows/`)
-- **Package manager**: Yarn
-
-## Directory Structure
-
-```
-content/              # All Markdown pages (drives site navigation automatically)
-  posts/              # Newsletter posts and event announcements
-    YYYY_MM_slug.md   # Naming convention — filename is the primary sort key
-components/           # Vue components
-  content/            # MDC components usable inside Markdown
-campaigns/            # Campaign planning assets
-  in-progress/        # Active campaigns
-  completed/          # Archived campaigns
-  ideas/              # Future ideas
-hack/                 # Board tools and templates (gitignored)
-.agent/workflows/     # Agent guides for common tasks
-public/               # Static assets (images, PDFs)
-```
-
-## Creating a New Post
-
-1. Create `content/posts/YYYY_MM_slug.md`
-2. Add required frontmatter:
-
-```yaml
----
-navigation.title: 'Descriptive title for listing'
-layout: 'default'
-title: 'Full page title'
-description: 'Brief SEO summary'
----
-```
-
-3. Do NOT set `navigation.path` — Nuxt generates it automatically
-4. Do NOT edit `content/posts/index.md` — `PostList.vue` auto-discovers posts
-5. Place images in `public/images/posts/` and reference as `/images/posts/filename.jpg`
-
-See `.agent/workflows/how_to_create_post.md` for full details.
-
-## Build & Deploy
+Nuxt 3 + Content Wind · @nuxt/content v2 (Markdown + MDC) · TailwindCSS + Pinceau (primary: teal) · @vite-pwa/nuxt · nuxt-gtag (GA4: `G-HYRQZ2BGTP`) · Yarn. See `package.json` and `nuxt.config.ts` for specifics.
 
 ```bash
-yarn install    # Install deps
-yarn dev        # Local dev server
-yarn generate   # Build static site → ./dist
+yarn install    # deps
+yarn dev        # local dev server — see "long-running processes" below
+yarn generate   # static build → ./dist
 ```
 
-Merging to `main` auto-deploys to GitHub Pages. A GitHub Release is also created automatically on each merge, with `neighborhood-covenant.pdf` attached as an asset.
+Merging to `main` auto-deploys to GitHub Pages and creates a GitHub Release with `neighborhood-covenant.pdf` attached.
 
-## Campaign Planning
+## Adding a post
 
-Campaign assets live in `campaigns/`. Each campaign gets a folder:
+1. New file: `content/posts/YYYY-MM-slug.md` — filename is the primary sort key.
+2. Required frontmatter:
+   ```yaml
+   ---
+   navigation.title: 'Short title for listing'
+   layout: 'default'
+   title: 'Full page title'
+   description: 'Brief SEO summary'
+   ---
+   ```
+3. **Do not** set `navigation.path` — Nuxt generates it.
+4. **Do not** edit `content/posts/index.md` — `PostList.vue` auto-discovers posts.
+5. Images go in `public/images/posts/`, referenced as `/images/posts/<file>`.
 
-```
-campaigns/in-progress/YYYY-MM-slug/
-  plan.md           # Strategy and goals
-  email_draft.md    # Email content
-  social_posts.md   # Social media copy
-```
+Full walkthrough: `.agent/workflows/how_to_create_post.md`.
 
-Move to `campaigns/completed/` when done.
+## Long-running processes
 
-## Beta Features
+Persistent processes (`yarn dev`, watchers, ngrok, tunnels) never return on their own — a foreground Bash call will hang. Past `/loop` runs have burned wall-clock budget this way.
 
-Some features are gated behind a `woodmont_beta` localStorage flag:
+- **Start servers with `run_in_background: true`.** Never wait on the spawn.
+- **Probe readiness with a counter loop**, not `timeout` (macOS lacks GNU `timeout`):
+  ```bash
+  for i in {1..45}; do curl -s --max-time 3 http://localhost:3000 > /dev/null && break; sleep 2; done
+  ```
+- **Cap foreground Bash with an explicit `timeout`** (e.g. 60000ms) — fail fast beats hanging.
+- **Don't kill processes you didn't start.** The user runs parallel worktree dev servers. Check `git worktree list` and `ps -eo pid,etime,command | grep nuxi` first.
+- `EMFILE: too many open files, watch` = multiple Nuxt instances on the same tree. Use exactly one dev server; don't bump ulimits.
+- **Clean up your own background PIDs** before handing off.
+
+## Multi-session work: GitHub issues are the state machine
+
+For work that may span sessions (especially `/loop`), the tracking issue is the durable handoff — uncommitted working-tree changes are ephemeral.
+
+1. Read the issue → find the latest `### STATE` comment → resume from there.
+2. Do one chunk → commit to the feature branch.
+3. Post a new `### STATE` comment: what was done, branch SHA, what's next, blockers.
+4. Open a draft PR as soon as anything is committed; push screenshots there.
+
+## Campaigns
+
+Each campaign gets a folder under `campaigns/in-progress/YYYY-MM-slug/` containing `plan.md`, `email_draft.md`, `social_posts.md`. Move to `campaigns/completed/` when done.
+
+## Beta features
+
+Gated behind a `woodmont_beta` localStorage flag — **do not link publicly** until production-ready:
 - `/gallery` — Community photo gallery
 - `/history` — History Hub
 
-Do not link to these publicly until they are production-ready.
+## Key files
 
-## Key Files
+- `content/1.index.md` — home page
+- `app.config.ts` — site title, social links, cover image
+- `nuxt.config.ts` — modules, PWA, GA
+- `tokens.config.ts` — design tokens
+- `public/neighborhood-covenant.pdf` — community covenant
 
-- `content/1.index.md` — Home page
-- `content/posts/` — All posts and newsletters
-- `app.config.ts` — Site title, social links, cover image
-- `nuxt.config.ts` — Nuxt modules and GA config
-- `tokens.config.ts` — Design tokens (primary color: teal)
-- `public/neighborhood-covenant.pdf` — Community covenant document
+## Workflow guides
 
-## Agent Workflows
-
-Detailed guides for common tasks are in `.agent/workflows/`:
-- `how_to_create_post.md` — Adding posts and newsletters
-- `president_agent.md` — Presidential role and communication guidelines
-- `architecture_agent.md` — Architecture decisions
-- `google_drive_manager.md` — Google Drive integration
+Per-task guides in `.agent/workflows/`: `how_to_create_post.md`, `president_agent.md`, `architecture_agent.md`, `google_drive_manager.md`.

@@ -8,8 +8,8 @@ This workflow describes how to add a new event, newsletter, or update to the web
 
 ## 1. File Location & Naming
 *   All posts live in `content/posts/`.
-*   **Naming Convention**: `YYYY_MM_slug.md` (e.g., `2026_01_social_event.md`).
-    *   The `YYYY_MM` prefix is crucial for sorting purposes.
+*   **Naming Convention**: `YYYY-MM-slug.md` (e.g., `2026-01-social.md`).
+    *   The `YYYY-MM` prefix is crucial for sorting purposes.
     *   Do NOT rely on the `date` frontmatter field alone; the filename is the primary sort key.
 
 ## 2. Frontmatter Requirements

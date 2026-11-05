@@ -1,10 +1,17 @@
 /* ============================================================
    Woodmont Civic Association — Brand Tokens
-   Forest Green brand + Teal accent + Cream + Playfair/Outfit
+   Forest Green brand + Cream + Playfair/Outfit
+
+   Architecture:
+   * Forest palette (--color-forest-*) is the raw brand colour
+     wheel — never overridden by dark mode.
+   * Semantic tokens (--color-paper, --color-cream, --color-ink,
+     --color-brand, --color-rule, etc.) flip under .dark so
+     every consumer auto-themes without per-component overrides.
    ============================================================ */
 
 :root {
-  /* Forest Green (logo/brand) */
+  /* Forest Green palette (raw, immutable) */
   --color-forest-50:  #f0f7f0;
   --color-forest-100: #d6ead7;
   --color-forest-200: #aed4b0;
@@ -16,19 +23,61 @@
   --color-forest-800: #163d1a;
   --color-forest-900: #0f2c12;
 
-  /* Cream */
-  --color-cream:      #f5f0e8;
-  --color-cream-dark: #ede8de;
+  /* Semantic surfaces — flip in .dark */
+  --color-cream:       #f5f0e8;   /* outside-card / blockquote tint */
+  --color-cream-dark:  #ede8de;   /* slightly stronger tint (code bg) */
+  --color-paper:       #faf8f4;   /* card / article body surface */
+  --color-paper-inner: #ede6d9;   /* the inner double-border line */
+  --color-app-bg:      var(--color-cream);
 
-  /* Semantic */
-  --color-brand:        var(--color-forest-700);
-  --color-brand-light:  var(--color-forest-500);
-  --color-brand-dark:   var(--color-forest-900);
+  /* Editorial ink — flip in .dark */
+  --color-ink:         #1f2937;
+  --color-ink-soft:    #4b5563;
+  --color-ink-mute:    #6b7280;
+  --color-ink-fade:    #9ca3af;
+
+  /* Rules — flip in .dark */
+  --color-rule:        #e5dfd1;
+  --color-rule-soft:   #ede6d9;
+
+  /* Brand accents on the current surface — flip in .dark */
+  --color-brand:        var(--color-forest-700); /* primary forest */
+  --color-brand-soft:   var(--color-forest-500); /* secondary */
+  --color-brand-strong: var(--color-forest-900); /* darker, for bold ink */
+  --color-brand-fade:   var(--color-forest-400); /* fainter, for kickers */
+
+  /* Back-compat aliases */
+  --color-brand-light:  var(--color-brand-soft);
+  --color-brand-dark:   var(--color-brand-strong);
 
   /* Brand fonts */
   --font-brand-serif: 'Playfair Display', Georgia, serif;
   --font-brand-sans:  'Outfit', ui-sans-serif, system-ui, sans-serif;
   --font-brand-mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Dark theme — only the semantic tokens flip.
+   Forest palette stays; what changes is "which forest do we paint
+   on the current surface" and "what is the current surface". */
+.dark {
+  --color-cream:       #1a261c;
+  --color-cream-dark:  #1f2e21;
+  --color-paper:       #16201a;
+  --color-paper-inner: #1f2b22;
+  --color-app-bg:      #0d1410;
+
+  --color-ink:         #e8e2d4;
+  --color-ink-soft:    #c4ccc1;
+  --color-ink-mute:    #969f95;
+  --color-ink-fade:    #6f786f;
+
+  --color-rule:        #2a3a2d;
+  --color-rule-soft:   #1f2b22;
+
+  --color-brand:        #c5e3c6;
+  --color-brand-soft:   #7cb87f;
+  --color-brand-strong: var(--color-forest-100);
+  --color-brand-fade:   #4e9653;
 }
 
 /* Brand utility classes (used by BrandHero and AppNavbar) */
@@ -42,14 +91,288 @@
 
 .wca-wordmark-sub {
   font-family: var(--font-brand-serif);
+  font-style: normal;
+  color: var(--color-brand-soft);
+}
+
+/* ============================================================
+   Editorial Prose
+   Every page rendered through .prose (ContentDoc) gets the
+   newspaper-grade typography used across the site.
+
+   Selectors are doubled (.prose.prose) to outrank Tailwind
+   Typography's prose-* utility classes (which compile to the
+   same single-class specificity and load after our brand CSS).
+   ============================================================ */
+
+.prose.prose {
+  /* All prose tokens are aliases for the semantic root tokens,
+     so dark mode flows down automatically. */
+  --prose-ink:         var(--color-ink);
+  --prose-ink-soft:    var(--color-ink-soft);
+  --prose-ink-mute:    var(--color-ink-mute);
+  --prose-ink-fade:    var(--color-ink-fade);
+  --prose-rule:        var(--color-rule);
+  --prose-rule-soft:   var(--color-rule-soft);
+  --prose-paper:       var(--color-paper);
+  --prose-forest:      var(--color-brand);
+  --prose-forest-ink:  var(--color-brand-strong);
+  --prose-forest-mid:  var(--color-brand-soft);
+  --prose-forest-soft: var(--color-brand-fade);
+
+  font-family: var(--font-brand-sans);
+  color: var(--prose-ink);
+  font-size: 17px;
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings — Playfair, forest-coloured */
+.prose.prose h1,
+.prose.prose h2,
+.prose.prose h3,
+.prose.prose h4,
+.prose.prose h5,
+.prose.prose h6 {
+  font-family: var(--font-brand-serif);
+  color: var(--prose-forest);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.prose.prose h1 {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  margin: 0 0 0.75em;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px double var(--prose-forest);
+}
+
+.prose.prose h2 {
+  font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.8rem);
+  margin: 2.4em 0 0.55em;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.prose.prose h3 {
+  font-family: var(--font-brand-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--prose-forest-ink);
+  margin: 2em 0 0.5em;
+  border-bottom: 0;
+  text-decoration: none;
+}
+
+.prose.prose h4 {
+  font-family: var(--font-brand-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--prose-forest-mid);
+  margin: 1.6em 0 0.4em;
+}
+
+.prose.prose h5,
+.prose.prose h6 {
+  font-size: 1.05rem;
+  margin: 1.4em 0 0.3em;
+  color: var(--prose-forest-ink);
+}
+
+/* Body paragraphs */
+.prose.prose p {
+  margin: 0 0 1.1em;
+  color: var(--prose-ink);
+}
+
+/* Standfirst — first paragraph after H1 */
+.prose.prose h1 + p {
+  font-family: var(--font-brand-serif);
+  font-style: normal;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--prose-ink-soft);
+  margin-bottom: 1.4em;
+  max-width: 60ch;
+}
+
+/* Inline emphasis */
+.prose.prose strong,
+.prose.prose b {
+  color: var(--prose-forest-ink);
+  font-weight: 700;
+}
+.prose.prose em,
+.prose.prose i {
+  font-family: inherit;
   font-style: italic;
-  color: var(--color-brand-light);
+  color: inherit;
+}
+.prose.prose strong em,
+.prose.prose em strong,
+.prose.prose b i,
+.prose.prose i b {
+  color: var(--prose-forest);
 }
 
-.dark .wca-wordmark {
-  color: var(--color-cream);
+/* Links — subtle forest underline that thickens on hover. */
+.prose.prose a {
+  color: var(--prose-forest);
+  text-decoration: none;
+  border: 0;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  padding-bottom: 1px;
+  font-weight: 500;
+  transition: color 150ms, background-size 200ms;
+}
+.prose.prose a:hover {
+  color: var(--prose-forest-mid);
+  background-size: 100% 2px;
 }
 
-.dark .wca-wordmark-sub {
-  color: rgba(245, 240, 232, 0.7);
+/* Lists */
+.prose.prose ul,
+.prose.prose ol {
+  margin: 0 0 1.2em;
+  padding-left: 1.4em;
+}
+.prose.prose ul > li,
+.prose.prose ol > li {
+  margin: 0.45em 0;
+  padding-left: 0.25em;
+}
+.prose.prose ul > li::marker {
+  color: var(--prose-forest-mid);
+  content: '◆  ';
+  font-size: 0.65em;
+}
+.prose.prose ol {
+  list-style: none;
+  counter-reset: wca-counter;
+  padding-left: 0;
+}
+.prose.prose ol > li {
+  counter-increment: wca-counter;
+  position: relative;
+  padding-left: 2.6em;
+}
+.prose.prose ol > li::before {
+  content: counter(wca-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  font-family: var(--font-brand-mono);
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--prose-forest-mid);
+  width: 2em;
+  text-align: right;
+  padding-right: 0.6em;
+  border-right: 1px solid var(--prose-rule);
+}
+
+.prose.prose ul ul,
+.prose.prose ol ul,
+.prose.prose ul ol,
+.prose.prose ol ol {
+  margin: 0.4em 0 0.4em;
+}
+
+/* Blockquote — newspaper pull-quote */
+.prose.prose blockquote {
+  margin: 1.6em 0;
+  padding: 1.1em 1.4em;
+  background: var(--color-cream);
+  border-left: 4px solid var(--prose-forest);
+  border-radius: 2px;
+  font-family: var(--font-brand-serif);
+  font-style: normal;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--prose-ink-soft);
+  quotes: none;
+}
+.prose.prose blockquote p { margin: 0; }
+.prose.prose blockquote p + p { margin-top: 0.6em; }
+.prose.prose blockquote p::before,
+.prose.prose blockquote p::after { content: ''; }
+
+/* Horizontal rule */
+.prose.prose hr {
+  border: 0;
+  height: 0;
+  margin: 2.4em auto;
+  width: 60%;
+  border-top: 3px double var(--prose-forest);
+}
+
+/* Inline code & code blocks */
+.prose.prose code {
+  font-family: var(--font-brand-mono);
+  font-size: 0.9em;
+  background: var(--color-cream-dark);
+  color: var(--prose-forest-ink);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.prose.prose code::before,
+.prose.prose code::after { content: ''; }
+.prose.prose pre {
+  background: #14241a;
+  color: #e6f0e8;
+  font-family: var(--font-brand-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  padding: 1.1em 1.3em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.2em 0;
+}
+.prose.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Tables */
+.prose.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.95em;
+}
+.prose.prose th {
+  font-family: var(--font-brand-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--prose-forest);
+  text-align: left;
+  padding: 0.6em 0.9em;
+  border-bottom: 2px solid var(--prose-forest);
+}
+.prose.prose td {
+  padding: 0.7em 0.9em;
+  border-bottom: 1px solid var(--prose-rule);
+  vertical-align: top;
+}
+.prose.prose tbody tr:nth-child(even) td { background: var(--color-cream); }
+
+/* Images */
+.prose.prose img {
+  border-radius: 4px;
+  margin: 1.4em 0;
 }

@@ -23,6 +23,28 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap'
         },
       ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Woodmont Civic Association',
+            alternateName: 'WCA',
+            url: 'https://woodmontbonair.com',
+            logo: 'https://woodmontbonair.com/logo.svg',
+            description: 'Official site of the Woodmont Civic Association — news, events, and resources for the Woodmont neighborhood of Bon Air, VA.',
+            email: 'woodmontbonair@gmail.com',
+            areaServed: {
+              '@type': 'Place',
+              name: 'Woodmont, Bon Air, Chesterfield County, Virginia',
+            },
+            sameAs: [
+              'https://www.facebook.com/search/top/?q=woodmont%20civic%20association',
+            ],
+          }),
+        },
+      ],
     },
   },
   css: [
@@ -31,7 +53,33 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-gtag',
     '@vite-pwa/nuxt',
+    // SEO stack — installed à la carte rather than via @nuxtjs/seo because the
+    // bundle pulls in nuxt-og-image, which requires @nuxt/content v3 and would
+    // break the content-wind theme. Organization JSON-LD is hand-rolled in
+    // app.head.script below (the nuxt-schema-org module pulls in @nuxt/ui +
+    // Tailwind v4 via its devtools layer, which conflicts with content-wind's
+    // Tailwind v3).
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+    'nuxt-seo-utils',
   ],
+  site: {
+    url: 'https://woodmontbonair.com',
+    name: 'Woodmont Civic Association',
+    description: 'Official site of the Woodmont Civic Association — news, events, and resources for the Woodmont neighborhood of Bon Air, VA.',
+    defaultLocale: 'en',
+    // GitHub Pages serves directory routes at the trailing-slash form and 301s
+    // /foo → /foo/. Without this, @nuxtjs/sitemap emits /posts/X and
+    // nuxt-seo-utils sets <link rel="canonical" href=".../posts/X">, both of
+    // which redirect to the slash form Google actually serves. That mismatch
+    // is what GSC flags as "Page with redirect" + "Duplicate without
+    // user-selected canonical". Setting this makes both modules emit the
+    // /foo/ form so the canonical, sitemap, and served URL all agree.
+    trailingSlash: true,
+  },
+  sitemap: {
+    exclude: ['/gallery', '/history', '/news/**'],
+  },
   gtag: {
     // The Google Analytics 4 measurement ID
     id: 'G-HYRQZ2BGTP'
@@ -55,7 +103,14 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
-      navigateFallback: '/',
+      // Disable the navigation fallback. This is an SSG site with a precached
+      // HTML file per route, so navigation requests should fall through to the
+      // network (or matching precache entry) — not a single SPA shell. With a
+      // fallback set, any URL not matching a precache entry exactly (e.g.
+      // /posts/ with trailing slash) gets the home page instead of the right
+      // page. Note: @vite-pwa/nuxt defaults this to '/' if the key is absent,
+      // so we must set it explicitly (null cast — Workbox accepts no value).
+      navigateFallback: null as unknown as string,
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,webmanifest}'],
     },
     client: {
