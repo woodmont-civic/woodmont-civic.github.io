@@ -10,7 +10,7 @@ const links: Link[] = [
   { label: 'Get Involved', href: '#get-involved' },
   { label: 'Pay Dues', href: '#dues' },
   { label: 'Purpose', href: '#purpose' },
-  { label: 'Membership', href: '#membership' },
+  { label: 'Membership', href: '/registration' },
 ]
 </script>
 
