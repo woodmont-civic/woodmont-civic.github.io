@@ -120,16 +120,7 @@ function title(p: Post) {
     <!-- Masthead -->
     <header class="masthead">
       <div class="kicker"><span>EST. 1963</span>·<span>A NEIGHBORLY DISPATCH</span></div>
-      <h1 class="masthead-title">
-        <img
-          class="masthead-art"
-          src="/images/archive/warbler-masthead-1964.png"
-          alt="The Woodmont Warbler"
-          width="1400"
-          height="423"
-        >
-      </h1>
-      <div class="masthead-credit">Masthead from our December 1964 issue</div>
+      <h1><span class="the">The</span>Woodmont Warbler</h1>
       <div class="tag">News, notes &amp; nature from The Woodmont Bon Air civic association</div>
       <div class="meta">
         <span>Vol. I · No. 1 (New Series)</span>
@@ -281,30 +272,23 @@ function title(p: Post) {
   margin-bottom: 8px;
 }
 .masthead .kicker span { display: inline-block; padding: 0 10px; }
-.masthead .masthead-title {
-  margin: 10px 0 0;
-  line-height: 0;
+.masthead h1 {
+  font-family: var(--font-serif);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1;
+  letter-spacing: -.015em;
+  margin: 0;
 }
-.masthead .masthead-art {
+.masthead h1 .the {
   display: block;
-  width: 100%;
-  max-width: 720px;
-  height: auto;
-  margin: 0 auto;
-}
-/* The scan's black ink needs a light surface to stay legible in dark mode. */
-:global(.dark .masthead-art) {
-  max-width: 760px;
-  padding: 20px;
-  border-radius: 4px;
-  background: #f5f0e8;
-}
-.masthead .masthead-credit {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .12em;
-  color: var(--ink-fade);
-  margin-top: 8px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: var(--forest-light);
+  margin-bottom: 6px;
 }
 .masthead .tag {
   font-family: var(--font-serif);
@@ -331,6 +315,7 @@ function title(p: Post) {
 .masthead .meta span:last-child { border-right: none; }
 
 @media (max-width: 640px) {
+  .masthead h1 { font-size: 44px; }
   .masthead .kicker span { padding: 0 6px; font-size: 9px; letter-spacing: .2em; }
 }
 
