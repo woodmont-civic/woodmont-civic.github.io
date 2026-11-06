@@ -1,0 +1,269 @@
+{
+ "note": "UNTESTED on a real cutter. All text is outlined. Check size on import against manifest.json.",
+ "units": "inches; files are 100 units per inch",
+ "signs": {
+  "yard-sign-24x18": {
+   "title": "WCA yard sign",
+   "w_in": 24,
+   "h_in": 18,
+   "stock": "4 mm corrugated plastic, flutes vertical",
+   "colors": {
+    "green": {
+     "file": "cut-files/yard-sign-24x18--green.svg",
+     "ink_sqin": 80.6,
+     "thin_stroke_p5_in": 0.06,
+     "islands": 51,
+     "islands_under_quarter_sqin": 18,
+     "bbox_in": [
+      1.3,
+      1.78,
+      22.63,
+      16.2
+     ],
+     "pieces": [
+      {
+       "id": "seal",
+       "w": 8.96,
+       "h": 14.42,
+       "source": "trace"
+      },
+      {
+       "id": "name-1",
+       "w": 10.92,
+       "h": 1.71,
+       "source": "Playfair 700"
+      },
+      {
+       "id": "name-2",
+       "w": 4.87,
+       "h": 1.7,
+       "source": "Playfair 700"
+      },
+      {
+       "id": "name-3",
+       "w": 11.47,
+       "h": 1.7,
+       "source": "Playfair 700"
+      },
+      {
+       "id": "url",
+       "w": 11.41,
+       "h": 0.84,
+       "source": "Outfit 600"
+      }
+     ]
+    },
+    "gold": {
+     "file": "cut-files/yard-sign-24x18--gold.svg",
+     "ink_sqin": 4.0,
+     "thin_stroke_p5_in": 0.156,
+     "islands": 16,
+     "islands_under_quarter_sqin": 5,
+     "bbox_in": [
+      11.22,
+      11.49,
+      22.03,
+      12.76
+     ],
+     "pieces": [
+      {
+       "id": "join",
+       "w": 10.81,
+       "h": 1.27,
+       "source": "Outfit 700"
+      }
+     ]
+    }
+   }
+  },
+  "meeting-strip-24x6": {
+   "title": "Meeting tonight swap-out strip",
+   "w_in": 24,
+   "h_in": 6,
+   "stock": "4 mm corrugated plastic, flutes vertical",
+   "colors": {
+    "green": {
+     "file": "cut-files/meeting-strip-24x6--green.svg",
+     "ink_sqin": 23.3,
+     "thin_stroke_p5_in": 0.132,
+     "islands": 36,
+     "islands_under_quarter_sqin": 17,
+     "bbox_in": [
+      1.97,
+      0.97,
+      22.18,
+      5.25
+     ],
+     "pieces": [
+      {
+       "id": "meeting-tonight",
+       "w": 20.2,
+       "h": 2.64,
+       "source": "Outfit 700"
+      },
+      {
+       "id": "welcome",
+       "w": 11.57,
+       "h": 1.08,
+       "source": "Outfit 600"
+      }
+     ]
+    }
+   }
+  },
+  "door-magnet-24x12": {
+   "title": "WCA car door magnet",
+   "w_in": 24,
+   "h_in": 12,
+   "stock": "30 mil white magnetic sheet",
+   "colors": {
+    "rust": {
+     "file": "cut-files/door-magnet-24x12--rust.svg",
+     "ink_sqin": 13.6,
+     "thin_stroke_p5_in": 0.16,
+     "islands": 22,
+     "islands_under_quarter_sqin": 13,
+     "bbox_in": [
+      2.66,
+      2.17,
+      22.59,
+      9.11
+     ],
+     "pieces": [
+      {
+       "id": "warbler-rust",
+       "w": 6.96,
+       "h": 5.81,
+       "source": "trace"
+      },
+      {
+       "id": "url",
+       "w": 11.58,
+       "h": 0.85,
+       "source": "Outfit 700"
+      }
+     ]
+    },
+    "black": {
+     "file": "cut-files/door-magnet-24x12--black.svg",
+     "ink_sqin": 19.7,
+     "thin_stroke_p5_in": 0.04,
+     "islands": 29,
+     "islands_under_quarter_sqin": 14,
+     "bbox_in": [
+      0.96,
+      2.08,
+      22.14,
+      10.11
+     ],
+     "pieces": [
+      {
+       "id": "warbler-black",
+       "w": 9.22,
+       "h": 8.03,
+       "source": "trace"
+      },
+      {
+       "id": "name-1",
+       "w": 8.12,
+       "h": 1.28,
+       "source": "Playfair 700"
+      },
+      {
+       "id": "name-2",
+       "w": 11.08,
+       "h": 1.12,
+       "source": "Playfair 700"
+      }
+     ]
+    }
+   }
+  },
+  "table-banner-72x24": {
+   "title": "WCA event table banner",
+   "w_in": 72,
+   "h_in": 24,
+   "stock": "13 oz white vinyl banner, hemmed, grommets",
+   "colors": {
+    "green": {
+     "file": "cut-files/table-banner-72x24--green.svg",
+     "ink_sqin": 244.2,
+     "thin_stroke_p5_in": 0.14,
+     "islands": 87,
+     "islands_under_quarter_sqin": 8,
+     "bbox_in": [
+      3.6,
+      3.29,
+      66.53,
+      21.81
+     ],
+     "pieces": [
+      {
+       "id": "seal",
+       "w": 10.82,
+       "h": 17.41,
+       "source": "trace"
+      },
+      {
+       "id": "name-1",
+       "w": 50.21,
+       "h": 5.26,
+       "source": "Playfair 700"
+      },
+      {
+       "id": "name-2",
+       "w": 26.67,
+       "h": 3.95,
+       "source": "Playfair 700"
+      },
+      {
+       "id": "line-1",
+       "w": 15.91,
+       "h": 1.78,
+       "source": "Outfit 600"
+      },
+      {
+       "id": "line-2",
+       "w": 15.94,
+       "h": 1.78,
+       "source": "Outfit 600"
+      },
+      {
+       "id": "url",
+       "w": 24.8,
+       "h": 1.83,
+       "source": "Outfit 600"
+      }
+     ]
+    },
+    "gold": {
+     "file": "cut-files/table-banner-72x24--gold.svg",
+     "ink_sqin": 16.8,
+     "thin_stroke_p5_in": 0.22,
+     "islands": 30,
+     "islands_under_quarter_sqin": 3,
+     "bbox_in": [
+      47.03,
+      12.22,
+      63.78,
+      16.49
+     ],
+     "pieces": [
+      {
+       "id": "join-1",
+       "w": 13.41,
+       "h": 1.77,
+       "source": "Outfit 700"
+      },
+      {
+       "id": "join-2",
+       "w": 16.75,
+       "h": 1.92,
+       "source": "Outfit 700"
+      }
+     ]
+    }
+   }
+  }
+ }
+}
