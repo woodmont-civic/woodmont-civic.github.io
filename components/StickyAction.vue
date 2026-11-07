@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const route = useRoute()
+// The pay page already shows every payment option, so the bar would only cover it.
+const onPayPage = computed(() => route.path.startsWith('/pay'))
 const isVisible = ref(false)
 const isDismissed = ref(false)
 let lastScrollY = 0
@@ -60,7 +63,7 @@ onUnmounted(() => {
 
 <template>
   <div 
-    v-if="!isDismissed"
+    v-if="!isDismissed && !onPayPage"
     class="fixed bottom-0 left-0 right-0 p-4 z-50 transition-transform duration-300 transform"
     :class="isVisible ? 'translate-y-0' : 'translate-y-[150%]'"
   >
@@ -84,9 +87,7 @@ onUnmounted(() => {
         </p>
       </div>
       <a 
-        href="https://pay.woodmontbonair.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
+        href="/pay/"
         class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-primary-500/30 transition-all active:scale-95"
       >
         Pay Dues

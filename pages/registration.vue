@@ -11,7 +11,7 @@
         Sign up
       </a>
       <a
-        href="https://pay.woodmontbonair.com"
+        href="/pay/"
         class="inline-flex items-center rounded-lg border border-gray-300 dark:border-gray-600 px-5 py-3 font-medium text-gray-800 dark:text-gray-100 no-underline hover:border-primary-500 transition-colors"
       >
         Pay dues
