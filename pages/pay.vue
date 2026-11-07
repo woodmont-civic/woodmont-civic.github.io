@@ -10,7 +10,7 @@ const options = [
     blurb:
       'Keeps the entrances lit, the grass cut, and the signs standing. Please pay with the same email address you signed up with so we can match your payment.',
     cta: 'Pay dues',
-    url: '',
+    url: 'https://www.paypal.com/ncp/links/3X4HQ7H6ATYGQ',
   },
   {
     key: 'donate',
@@ -20,7 +20,7 @@ const options = [
     blurb:
       'Want to do a little more? A gift goes toward entrance plantings, signage, and neighborhood gatherings.',
     cta: 'Give a gift',
-    url: '',
+    url: 'https://www.paypal.com/donate/?hosted_button_id=RGMTLS95QNHHU',
   },
   {
     key: 'tea-towel',
@@ -30,7 +30,7 @@ const options = [
     blurb:
       'A keepsake for the kitchen. Pick yours up at a neighborhood event, or email us to arrange delivery.',
     cta: 'Buy a tea towel',
-    url: '',
+    url: 'https://www.paypal.com/ncp/payment/YWA2ZWNXV7CDJ',
   },
 ]
 
