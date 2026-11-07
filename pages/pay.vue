@@ -25,7 +25,7 @@ const options = [
   {
     key: 'tea-towel',
     title: 'Woodmont tea towel',
-    price: '$40',
+    price: '$20',
     priceNote: 'each',
     blurb: 'A Woodmont keepsake for your kitchen.',
     cta: 'Buy a tea towel',
