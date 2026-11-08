@@ -26,8 +26,8 @@ FONTS = Path(sys.argv[1])
 U = 100  # file units per inch
 
 # Screen colors for proofs and previews. materials.md maps these to stocked vinyl.
-GREEN, GOLD, BLACK, RUST = "#1b4d1f", "#c98a14", "#16181a", "#b8682a"
-NAMES = {GREEN: "green", GOLD: "gold", BLACK: "black", RUST: "rust"}
+GREEN, GOLD, GREY = "#1b4d1f", "#c98a14", "#8b8374"
+NAMES = {GREEN: "green", GOLD: "gold"}
 NOTE = "UNTESTED on a real cutter. All text is outlined. Check size on import against manifest.json."
 
 _fonts = {}
@@ -78,31 +78,8 @@ def text(id, s, x, baseline, size, color, family="Outfit", wght=700, anchor="sta
     return Piece(id, color, sp.getCommands(), f"{family} {wght}")
 
 
-def placed(id, d, sw, x, y, h, sh, color):
-    """Bake a traced path into sign coordinates, so cut files carry no transforms."""
-    k = h / sh * U
-    nums = re.compile(r"(-?[\d.]+) (-?[\d.]+)")
-    out = nums.sub(lambda m: f"{float(m[1]) * k + x * U:.2f} {float(m[2]) * k + y * U:.2f}", d)
-    return Piece(id, color, out, "trace")
-
-
-src = ROOT / "source"
-seal_svg = (src / "wca-seal-cut-test-8in.svg").read_text()
-SEAL = re.search(r' d="([^"]+)"', seal_svg)[1]
-bird_svg = (src / "warbler-cut-test-10in.svg").read_text()
-BIRD_RUST = re.search(r'id="layer-rust"><path[^>]* d="([^"]+)"', bird_svg)[1]
-BIRD_DARK = re.search(r'id="layer-black"><path[^>]* d="([^"]+)"', bird_svg)[1]
-SW, SH, BW, BH = 240, 388, 325, 278
-
-
-def seal(x, y, h, color=GREEN):
-    return placed("seal", SEAL, SW, x, y, h, SH, color)
-
-
-def bird(x, y, w):
-    h = w * BH / BW
-    return [placed("warbler-rust", BIRD_RUST, BW, x, y, h, BH, RUST),
-            placed("warbler-black", BIRD_DARK, BW, x, y, h, BH, BLACK)]
+# Image areas are left empty in the cut files. Images will come from community submissions.
+PLACEHOLDER_LABEL = ("Image to come", "(community submission)")
 
 
 PF = dict(family="Playfair", wght=700)
@@ -110,7 +87,8 @@ SIGNS = {
     "yard-sign-24x18": dict(
         title="WCA yard sign", w=24, h=18, rx=0.15, stock="4 mm corrugated plastic, flutes vertical",
         holes=[], hole_r=0,  # the strip joins with wire pushed into the top flutes
-        pieces=[seal(1.3, 1.75, 14.5),
+        image=(1.3, 1.75, 9.0, 14.5),
+        pieces=[
                 text("name-1", "Woodmont", 11.2, 4.25, 2.15, GREEN, **PF),
                 text("name-2", "Civic", 11.2, 6.75, 2.15, GREEN, **PF),
                 text("name-3", "Association", 11.2, 9.25, 2.15, GREEN, **PF),
@@ -119,25 +97,27 @@ SIGNS = {
     "meeting-strip-24x6": dict(
         title="Meeting tonight swap-out strip", w=24, h=6, rx=0.15, stock="4 mm corrugated plastic, flutes vertical",
         holes=[], hole_r=0,  # the strip joins with wire pushed into the bottom flutes
+        image=None,
         pieces=[text("meeting-tonight", "Meeting tonight", 12, 3.0, 2.8, GREEN, wght=700, anchor="middle"),
                 text("welcome", "All neighbors welcome", 12, 5.0, 1.15, GREEN, wght=600, anchor="middle")]),
     "door-magnet-24x12": dict(
         title="WCA car door magnet", w=24, h=12, rx=0.75, stock="30 mil white magnetic sheet",
         holes=[], hole_r=0,
-        pieces=[*bird(0.75, 1.9, 9.6),
-                text("name-1", "Woodmont", 11.0, 5.0, 1.6, BLACK, **PF),
-                text("name-2", "Civic Association", 11.0, 7.0, 1.42, BLACK, **PF),
-                text("url", "woodmontbonair.com", 11.0, 9.1, 1.15, RUST, wght=700)]),
+        image=(0.75, 1.9, 9.6, 8.2),
+        pieces=[
+                text("name-1", "Woodmont", 11.0, 5.0, 1.6, GREEN, **PF),
+                text("name-2", "Civic Association", 11.0, 7.0, 1.42, GREEN, **PF),
+                text("url", "woodmontbonair.com", 11.0, 9.1, 1.15, GREEN, wght=700)]),
     "table-banner-72x24": dict(
         title="WCA event table banner", w=72, h=24, rx=0.2, stock="13 oz white vinyl banner, hemmed, grommets",
         holes=[(1.6, 1.6), (36, 1.6), (70.4, 1.6), (1.6, 22.4), (36, 22.4), (70.4, 22.4)], hole_r=0.3,
-        pieces=[seal(3.6, 3.25, 17.5),
+        image=(3.6, 3.25, 10.8, 17.5),
+        pieces=[
                 text("name-1", "Woodmont Civic", 16.4, 11.2, 6.6, GREEN, **PF),
                 text("name-2", "Association", 16.4, 17.2, 5.0, GREEN, **PF),
-                text("join-1", "Come say hello.", 47, 13.6, 1.9, GOLD, wght=700),
-                text("join-2", "Join for $20 a year.", 47, 16.1, 1.9, GOLD, wght=700),
-                text("line-1", "Neighbors working", 47, 18.9, 1.9, GREEN, wght=600),
-                text("line-2", "together since 1961", 47, 21.4, 1.9, GREEN, wght=600),
+                text("join-1", "Come say hello", 47, 15.0, 1.9, GOLD, wght=700),
+                text("join-2", "Join for $20 a year", 47, 17.6, 1.9, GOLD, wght=700),
+                text("line", "Neighbors working together", 47, 21.4, 1.6, GREEN, wght=600),
                 text("url", "woodmontbonair.com", 16.4, 21.4, 2.5, GREEN, wght=600)]),
 }
 
@@ -181,6 +161,11 @@ for name, s in SIGNS.items():
         for hx, hy in s["holes"]:
             gap = max(p.x0 - hx, hx - p.x1, p.y0 - hy, hy - p.y1)
             assert gap > s["hole_r"] + 0.2, (name, p.id, "hole", hx, hy, gap)
+        if s["image"]:
+            ix, iy, iw, ih = s["image"]
+            gap = max(p.x0 - (ix + iw), ix - p.x1, p.y0 - (iy + ih), iy - p.y1)
+            assert gap > 0.5, (name, p.id, "image area", gap)
+    entry["image_area_in"] = dict(zip(("x", "y", "w", "h"), s["image"])) if s["image"] else None
     for c in dict.fromkeys(p.color for p in s["pieces"]):
         ps = [p for p in s["pieces"] if p.color == c]
         svg = header(w, h, f'{s["title"]}, {NAMES[c]} vinyl') + groups(ps) + "</svg>"
@@ -197,7 +182,17 @@ for name, s in SIGNS.items():
             "pieces": [dict(id=p.id, w=round(p.w, 2), h=round(p.h, 2), source=p.source) for p in ps]}
     board = f'<rect id="board-not-cut" x="1" y="1" width="{w * U - 2}" height="{h * U - 2}" rx="{s["rx"] * U}" fill="#fdfdfb" stroke="#8b8374" stroke-width="2"/>'
     holes = "".join(f'<circle cx="{x * U}" cy="{y * U}" r="{s["hole_r"] * U}" fill="#d8d3c8" stroke="#8b8374" stroke-width="2"/>' for x, y in s["holes"])
-    proof = header(w, h, s["title"]) + f'<g id="hardware-not-cut">{board}{holes}</g>' + groups(s["pieces"]) + "</svg>"
+    ph = ""
+    if s["image"]:
+        ix, iy, iw, ih = s["image"]
+        cx, cy = ix + iw / 2, iy + ih / 2
+        size = min(iw / 9, 0.9)
+        labels = [text("label-1", PLACEHOLDER_LABEL[0], cx, cy - size * 0.2, size, GREY, wght=600, anchor="middle"),
+                  text("label-2", PLACEHOLDER_LABEL[1], cx, cy + size * 1.2, size * 0.8, GREY, wght=500, anchor="middle"),
+                  text("label-3", f"{iw:g} × {ih:g} in", cx, cy + size * 2.5, size * 0.7, GREY, wght=500, anchor="middle")]
+        ph = (f'<g id="image-placeholder-not-cut"><rect x="{ix * U}" y="{iy * U}" width="{iw * U}" height="{ih * U}" rx="{0.2 * U}" '
+              f'fill="#f1eee7" stroke="{GREY}" stroke-width="4" stroke-dasharray="24 16"/>{groups(labels)}</g>')
+    proof = header(w, h, s["title"]) + f'<g id="hardware-not-cut">{board}{holes}</g>' + ph + groups(s["pieces"]) + "</svg>"
     (ROOT / "signs" / f"{name}.svg").write_text(proof)
     render(proof, 1600).save(ROOT / "previews" / f"{name}.png")
     manifest["signs"][name] = entry
