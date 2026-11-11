@@ -10,7 +10,7 @@ const options = [
     blurb:
       'Keeps the entrances lit, the grass cut, and the signs standing. Please pay with the email address you signed up with so we can match your payment.',
     cta: 'Pay dues',
-    url: 'https://www.paypal.com/ncp/links/3X4HQ7H6ATYGQ',
+    url: 'https://www.paypal.com/ncp/payment/3X4HQ7H6ATYGQ',
   },
   {
     key: 'donate',
