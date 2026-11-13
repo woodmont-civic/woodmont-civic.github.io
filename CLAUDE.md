@@ -31,7 +31,7 @@ Apply the presidential lens to anything community-facing:
 
 ## Stack
 
-Nuxt 3 + Content Wind · @nuxt/content v2 (Markdown + MDC) · TailwindCSS + Pinceau (primary: teal) · @vite-pwa/nuxt · nuxt-gtag (GA4: `G-HYRQZ2BGTP`) · Yarn. See `package.json` and `nuxt.config.ts` for specifics.
+Nuxt 3 + Content Wind · @nuxt/content v2 (Markdown + MDC) · TailwindCSS + Pinceau (primary: WCA forest scale, mirrors brand.css) · @vite-pwa/nuxt · nuxt-gtag (GA4: `G-HYRQZ2BGTP`) · Yarn. See `package.json` and `nuxt.config.ts` for specifics.
 
 ```bash
 yarn install    # deps

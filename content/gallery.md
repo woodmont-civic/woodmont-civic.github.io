@@ -8,7 +8,7 @@ gallery:
   - src: "/cover.jpg"
     caption: "The beautiful Woodmont entrance in full bloom."
     alt: "Woodmont Entrance"
-  - src: "https://placehold.co/800x600/teal/white?text=Pool+Party"
+  - src: "https://placehold.co/800x600/1b4d1f/f5f0e8?text=Pool+Party"
     caption: "Summer Splash at the WRA Pool!"
   - src: "https://placehold.co/600x800/orange/white?text=Fall+Picnic"
     caption: "Annual Fall Picnic gathering."
