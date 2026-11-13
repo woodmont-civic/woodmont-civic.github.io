@@ -45,7 +45,7 @@ onMounted(() => {
         </div>
         <div class="flex items-center gap-2">
           <button
-            class="text-xs px-3 py-1.5 rounded bg-teal-700 hover:bg-teal-800 text-white font-medium"
+            class="text-xs px-3 py-1.5 rounded bg-primary-700 hover:bg-primary-800 text-white font-medium"
             @click="$pwa.install()"
           >
             Install
