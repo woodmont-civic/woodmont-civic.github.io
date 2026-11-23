@@ -50,6 +50,12 @@ useHead({
     <div class="prose dark:prose-invert">
       <h1>Support Woodmont</h1>
       <p>Choose an option below. Payments are handled securely by PayPal.</p>
+      <p>
+        <strong>What happens after you pay dues:</strong> PayPal emails you a
+        receipt, and we match your payment to your sign-up. A board member will
+        reach out to welcome you and confirm your membership. In the meantime,
+        see <NuxtLink to="/welcome/">how to get started</NuxtLink>.
+      </p>
     </div>
 
     <ul class="pay-list">
